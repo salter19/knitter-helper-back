@@ -154,6 +154,22 @@ public abstract class BaseYarn {
         ranges.put(YarnType.CHUNKY, this.RANGE_CHUNKY);
         ranges.put(YarnType.SUPER_CHUNKY, this.RANGE_SUPER_CHUNKY);
     }
+
+    /**
+     * returns unit weight rounded into int.
+     * @return  int
+     */
+    public int getUnitWeight() {
+        return this.unitWeight;
+    }
+
+    /**
+     * returns meterage rounded into int.
+     * @return  int
+     */
+    public int getMeterage() {
+        return this.meterage;
+    }
 }
 
 // End of File
