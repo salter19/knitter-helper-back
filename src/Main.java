@@ -1,5 +1,3 @@
-package src;
-
 /**
  * This is the entry point class to run the program.
  * 
@@ -15,8 +13,11 @@ public class Main {
      *                of String array.
      */
     public static void main(String[] args) {
-
         BaseYarn lace = new Lace();
-        System.out.println("This is " + lace);
+        lace.setNeedleSize(2.5);
+        System.out.println(lace.getNeedleSize());
+        
     }
 }
+
+// End of File
