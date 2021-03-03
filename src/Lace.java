@@ -10,6 +10,5 @@ public class Lace extends BaseYarn {
         this.setUnitWeight(this.DEFAULT_WEIGHT);
         this.setMeterage(this.DEFAULT_METERAGE);
         this.setNeedleSize(1.5);
-        //this.setYarnType();
     }
 }
