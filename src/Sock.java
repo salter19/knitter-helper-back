@@ -1,5 +1,5 @@
 /**
- * Sock is a yarn type based.
+ * Sock is a yarn type.
  * 
  * Yarn types are based on the thickness of the yarn.
  * 
