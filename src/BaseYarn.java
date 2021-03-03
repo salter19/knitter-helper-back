@@ -6,27 +6,27 @@ package src;
  */
 public abstract class BaseYarn {
     /**
-     * unitWeight is the weight of yarn skein or 
+     * is the weight of yarn skein or 
      * ball in grams. It is rounded to integer value.
      */
     private int unitWeight;
     /**
-     * metrage is the approximate length in meters of yarn per
+     * is the approximate length in meters of yarn per
      * skein or ball. It is rounded to integer value.
      */
     private int meterage;
     /**
-     * gauge is approximation of stitches per cm with given
+     * is approximation of stitches per cm with given
      * needle size. It is rounded to integer value.
      */
-    private int gauge;
+    private int gaugeForTenCm;
     /**
-     * needleSize is the suggested needle size in mm. It is 
+     * is the suggested needle size in mm. It is 
      * a floating point value.
      */
     private float needleSize;
     /**
-     * weightType is a String that descripes the yarn in 
+     * is a String that descripes the yarn in 
      * standard yarn weight term, if one can be applied.
      */
     private String weightType;
@@ -48,6 +48,26 @@ public abstract class BaseYarn {
     public void setMeterage(int meterage) {
         this.meterage = meterage;
     }
+
+    /**
+     * sets the approximated number of stitches needed to 
+     * cover ten cm in knit surface.
+     * 
+     * @param stitchCount   rounded to integer, the number of
+     *                      stitches for ten cm in knit.
+     */
+    public void setGaugeForTenCm(int stitchCount) {
+        this.gaugeForTenCm = stitchCount;
+    }
+
+    /**
+     * sets suggested needle size for the yarn.
+     * @param needleSize    float value of needle size.
+     */
+    public void setNeedleSize(float needleSize) {
+        this.needleSize = needleSize;
+    }
+
 }
 
 // End of File
