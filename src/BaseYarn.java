@@ -1,7 +1,8 @@
 import java.util.*;
+import java.util.Map.Entry;
+
 /**
- * BaseYarn is an abstract superclass for different
- * types of yarn. 
+ * BaseYarn is an abstract superclass for different types of yarn.
  * 
  * @author Terhi Salonen
  * @version 1.0
@@ -19,49 +20,44 @@ public abstract class BaseYarn {
     private final int UNDEFINED_INT = -1;
 
     /**
-     * is approximation of stitches per cm with given
-     * needle size. It is a tight range with smallest
-     * stitches count and largest one.
+     * is approximation of stitches per cm with given needle size. It is a tight
+     * range with smallest stitches count and largest one.
      */
     private int[] gaugeForTenCm = new int[2];
 
     /** are meterage ranges for different yarn types. */
-    private final int[] RANGE_LACE = {600, 800};
-    private final int[] RANGE_FINGERING = {500, 599};
-    private final int[] RANGE_SOCK = {350, 499};
-    private final int[] RANGE_SPORT = {250, 349};
-    private final int[] RANGE_DK = {200, 249};
-    private final int[] RANGE_ARAN = {120, 199};
-    private final int[] RANGE_CHUNKY = {100, 119};
-    private final int[] RANGE_SUPER_CHUNKY = {60,99};
+    private final int[] RANGE_LACE = { 600, 800 };
+    private final int[] RANGE_FINGERING = { 500, 599 };
+    private final int[] RANGE_SOCK = { 350, 499 };
+    private final int[] RANGE_SPORT = { 250, 349 };
+    private final int[] RANGE_DK = { 200, 249 };
+    private final int[] RANGE_ARAN = { 120, 199 };
+    private final int[] RANGE_CHUNKY = { 100, 119 };
+    private final int[] RANGE_SUPER_CHUNKY = { 60, 99 };
 
-    /** 
-     * is the collection that holds YarnTypes and matching 
-     * ranges of meterage as a key - value pair.
+    /**
+     * is the collection that holds YarnTypes and matching ranges of meterage as a
+     * key - value pair.
      */
     private HashMap<YarnType, int[]> rangesMetrage = new HashMap<>();
 
     /**
-     * is the weight of yarn skein or 
-     * ball in grams. It is rounded to integer value.
+     * is the weight of yarn skein or ball in grams. It is rounded to integer value.
      * By default value is -1;
      */
     private int unitWeight = this.UNDEFINED_INT;
     /**
-     * is the approximate length in meters of yarn per
-     * skein or ball. It is rounded to integer value.
-     * By default value is -1;
+     * is the approximate length in meters of yarn per skein or ball. It is rounded
+     * to integer value. By default value is -1;
      */
     private int meterage = this.UNDEFINED_INT;
     /**
-     * is the suggested needle size in mm. It is 
-     * an array with two values, smallest and largest
-     * end of the scope.
+     * is the suggested needle size in mm. It is an array with two values, smallest
+     * and largest end of the scope.
      */
     private double[] needleSize = new double[2];
     /**
-     * is a YarnType that descripes the yarn in 
-     * standard yarn weight term.
+     * is a YarnType that descripes the yarn in standard yarn weight term.
      */
     private YarnType yarnType = YarnType.UNDEFINED;
 
@@ -74,8 +70,9 @@ public abstract class BaseYarn {
 
     /**
      * sets unitWeight for yarn.
-     * @param unitWeight    rounded to integer, the weight value of
-     *                      given skein or ball of yarn.
+     * 
+     * @param unitWeight rounded to integer, the weight value of given skein or ball
+     *                   of yarn.
      */
     void setUnitWeight(int unitWeight) {
         this.unitWeight = unitWeight;
@@ -83,21 +80,22 @@ public abstract class BaseYarn {
 
     /**
      * sets meterage for yarn.
-     * @param meterage  rounded to integer, the length value of
-     *                  given skein or ball of yarn.
+     * 
+     * @param meterage rounded to integer, the length value of given skein or ball
+     *                 of yarn.
      */
     void setMeterage(int meterage) {
         this.meterage = meterage;
     }
 
     /**
-     * sets the approximated number of stitches needed to
-     * cover ten cm in knit surface.
+     * sets the approximated number of stitches needed to cover ten cm in knit
+     * surface.
      * 
-     * @param start     rounded to integer, the smallest number of
-     *                  stitches needed to cover ten cm in knit surface.
-     * @param end       rounded to integer, the largest number of 
-     *                  stitches needed to cover ten cm in knit surface.
+     * @param start rounded to integer, the smallest number of stitches needed to
+     *              cover ten cm in knit surface.
+     * @param end   rounded to integer, the largest number of stitches needed to
+     *              cover ten cm in knit surface.
      */
     void setGaugeForTenCm(int start, int end) {
         this.gaugeForTenCm[0] = start;
@@ -106,39 +104,43 @@ public abstract class BaseYarn {
 
     /**
      * sets suggested needle size for the yarn.
-     * @param needleSize    double[] with limit values of needle size.
+     * 
+     * @param needleSize double[] with limit values of needle size.
      */
     void setNeedleSize(double[] needleSize) {
         this.needleSize = needleSize;
     }
 
     /**
-     * sets YarnType if unitWeight and meterage are set.
-     * YarnType is defined by ratio of meters per grams.
+     * sets YarnType if unitWeight and meterage are set. YarnType is defined by
+     * ratio of meters per grams.
      */
     void setYarnType() {
 
         if (this.unitWeight != this.UNDEFINED_INT 
-        && this.meterage != this.UNDEFINED_INT) {
-            double metersPerHundredGrams = ((double) this.meterage / this.unitWeight) * 100;
-            this.yarnType = setYarnTypeByRatio((int)metersPerHundredGrams);
+            && this.meterage != this.UNDEFINED_INT) {
+            double metersPerHundredGrams = 
+                ((double) this.meterage / this.unitWeight) * 100;
+            this.yarnType = setYarnTypeByRatio((int) metersPerHundredGrams);
         }
     }
 
     /**
-     * iterates through HashMap that holds YarnType as key and range
-     * of meterage for that given YarnType as value (int[]) and searches 
-     * for range where the given value resides. If one is found, the key 
-     * of the element is returned. If none is found, YarnType.UNDEFINED 
-     * is returned.
+     * iterates through HashMap that holds YarnType as key and range of meterage for
+     * that given YarnType as value (int[]) and searches for range where the given
+     * value resides. If one is found, the key of the element is returned. If none
+     * is found, YarnType.UNDEFINED is returned.
+     * 
      * @param value int value of meters per hundred grams.
-     * @return      YarnType
+     * @return YarnType
      */
     private YarnType setYarnTypeByRatio(int value) {
-        Iterator iterator = this.rangesMetrage.entrySet().iterator();
+        Iterator<Entry<YarnType, int[]>> iterator = 
+            this.rangesMetrage.entrySet().iterator();
 
         while(iterator.hasNext()) {
-            Map.Entry mapElement = (Map.Entry)iterator.next();
+            Map.Entry<YarnType, int[]> mapElement = 
+                (Map.Entry<YarnType, int[]>)iterator.next();
         
             int[] range =  (int[])mapElement.getValue();
 
