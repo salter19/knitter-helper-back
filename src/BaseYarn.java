@@ -2,19 +2,21 @@ import java.util.*;
 /**
  * BaseYarn is an abstract superclass for different
  * types of yarn. 
+ * 
+ * @author Terhi Salonen
+ * @version 1.0
  */
 
 public abstract class BaseYarn {
 
+    /**
+     * is the default value for a ball or skein of yarn.
+     */
     static final int DEFAULT_WEIGHT = 100;
     /**
      * is the default value used until value is set.
      */
     private final int UNDEFINED_INT = -1;
-    /**
-     * is the default value used until value is set.
-     */
-    private final double UNDEFINED_DOUBLE = -1;
 
     /**
      * is approximation of stitches per cm with given
