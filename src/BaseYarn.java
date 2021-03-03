@@ -4,7 +4,7 @@ package src;
  * types of yarn. 
  */
 
-import java.util.HashMap;
+import java.util.*;
 
 import src.YarnType;
 
@@ -17,10 +17,6 @@ public abstract class BaseYarn {
      * is the default value used until value is set.
      */
     private final double UNDEFINED_DOUBLE = -1;
-    /**
-     * is the default value used until value is set.
-     */
-    private final YarnType UNDEFINED_YARN_TYPE = null;
 
     private final int[] RANGE_LACE = {600, 800};
     private final int[] RANGE_FINGERING = {500, 599};
@@ -61,7 +57,7 @@ public abstract class BaseYarn {
      * is a YarnType that descripes the yarn in 
      * standard yarn weight term.
      */
-    private YarnType yarnType = this.UNDEFINED_YARN_TYPE;
+    private YarnType yarnType = YarnType.UNDEFINED;
 
     public BaseYarn() {
         this.setRanges();
@@ -112,15 +108,37 @@ public abstract class BaseYarn {
 
         if (this.unitWeight != this.UNDEFINED_INT 
         && this.meterage != this.UNDEFINED_INT) {
-
+            System.out.println(this.yarnType);
             double metersPerHundredGrams = ((double) this.meterage / this.unitWeight) * 100;
-            this.yarnType = getYarnType((int)metersPerHundredGrams);
+            this.yarnType = setYarnTypeByRatio((int)metersPerHundredGrams);
+            System.out.println(this.yarnType);
         }
     }
 
-    // private YarnType getYarnType(int value) {
+    /**
+     * iterates through HashMap that holds YarnType as key and range
+     * of meterage for that given YarnType as value (int[]) and searches 
+     * for range where the given value resides. If one is found, the key 
+     * of the element is returned. If none is found, YarnType.UNDEFINED 
+     * is returned.
+     * @param value int value of meters per hundred grams.
+     * @return      YarnType
+     */
+    private YarnType setYarnTypeByRatio(int value) {
+        Iterator iterator = this.ranges.entrySet().iterator();
+
+        while(iterator.hasNext()) {
+            Map.Entry mapElement = (Map.Entry)iterator.next();
         
-    // }
+            int[] range =  (int[])mapElement.getValue();
+
+            if (value >= range[0] && value <= range[1]) {
+                return (YarnType) mapElement.getKey();
+            }
+            
+        }
+        return YarnType.UNDEFINED;
+    }
 
     private void setRanges() {
         ranges.put(YarnType.LACE, this.RANGE_LACE);
