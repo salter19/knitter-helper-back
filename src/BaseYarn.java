@@ -186,6 +186,14 @@ public abstract class BaseYarn {
     public double getNeedleSize() {
         return this.needleSize;
     }
+
+    /**
+     * returns YarnType of the yarn.
+     * @return  YarnType
+     */
+    public YarnType getYarnType() {
+        return this.yarnType;
+    }
 }
 
 // End of File
