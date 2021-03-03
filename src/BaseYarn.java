@@ -5,6 +5,8 @@ import java.util.*;
  */
 
 public abstract class BaseYarn {
+
+    static final int DEFAULT_WEIGHT = 100;
     /**
      * is the default value used until value is set.
      */
@@ -85,7 +87,6 @@ public abstract class BaseYarn {
     void setMeterage(int meterage) {
         this.meterage = meterage;
     }
-
 
     /**
      * sets the approximated number of stitches needed to
@@ -203,6 +204,9 @@ public abstract class BaseYarn {
         return this.yarnType;
     }
 
+    /**
+     * returns the YarnType in a string format.
+     */
     @Override
     public String toString() {
         return this.yarnType + "";
