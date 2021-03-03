@@ -37,7 +37,7 @@ public abstract class BaseYarn {
      * is the collection that holds YarnTypes and matching 
      * ranges of meterage as a key - value pair.
      */
-    private HashMap<YarnType, int[]> ranges = new HashMap<>();
+    private HashMap<YarnType, int[]> rangesMetrage = new HashMap<>();
 
     /**
      * is the weight of yarn skein or 
@@ -53,10 +53,10 @@ public abstract class BaseYarn {
     private int meterage = this.UNDEFINED_INT;
     /**
      * is the suggested needle size in mm. It is 
-     * a floating point value.
-     * By default value is -1;
+     * an array with two values, smallest and largest
+     * end of the scope.
      */
-    private double needleSize = this.UNDEFINED_DOUBLE;
+    private double[] needleSize = new double[2];
     /**
      * is a YarnType that descripes the yarn in 
      * standard yarn weight term.
@@ -67,7 +67,7 @@ public abstract class BaseYarn {
      * is the constructor.
      */
     public BaseYarn() {
-        this.setRanges();
+        this.setRangesMetrage();
     }
 
     /**
@@ -104,9 +104,9 @@ public abstract class BaseYarn {
 
     /**
      * sets suggested needle size for the yarn.
-     * @param needleSize    double value of needle size.
+     * @param needleSize    double[] with limit values of needle size.
      */
-    void setNeedleSize(double needleSize) {
+    void setNeedleSize(double[] needleSize) {
         this.needleSize = needleSize;
     }
 
@@ -133,7 +133,7 @@ public abstract class BaseYarn {
      * @return      YarnType
      */
     private YarnType setYarnTypeByRatio(int value) {
-        Iterator iterator = this.ranges.entrySet().iterator();
+        Iterator iterator = this.rangesMetrage.entrySet().iterator();
 
         while(iterator.hasNext()) {
             Map.Entry mapElement = (Map.Entry)iterator.next();
@@ -151,15 +151,15 @@ public abstract class BaseYarn {
     /**
      * sets elements into HashMap<YarnType, int[]> ranges.
      */
-    private void setRanges() {
-        ranges.put(YarnType.LACE, this.RANGE_LACE);
-        ranges.put(YarnType.FINGERING, this.RANGE_FINGERING);
-        ranges.put(YarnType.SOCK, this.RANGE_SOCK);
-        ranges.put(YarnType.SPORT, this.RANGE_SPORT);
-        ranges.put(YarnType.DK, this.RANGE_DK);
-        ranges.put(YarnType.ARAN, this.RANGE_ARAN);
-        ranges.put(YarnType.CHUNKY, this.RANGE_CHUNKY);
-        ranges.put(YarnType.SUPER_CHUNKY, this.RANGE_SUPER_CHUNKY);
+    private void setRangesMetrage() {
+        rangesMetrage.put(YarnType.LACE, this.RANGE_LACE);
+        rangesMetrage.put(YarnType.FINGERING, this.RANGE_FINGERING);
+        rangesMetrage.put(YarnType.SOCK, this.RANGE_SOCK);
+        rangesMetrage.put(YarnType.SPORT, this.RANGE_SPORT);
+        rangesMetrage.put(YarnType.DK, this.RANGE_DK);
+        rangesMetrage.put(YarnType.ARAN, this.RANGE_ARAN);
+        rangesMetrage.put(YarnType.CHUNKY, this.RANGE_CHUNKY);
+        rangesMetrage.put(YarnType.SUPER_CHUNKY, this.RANGE_SUPER_CHUNKY);
     }
 
     /**
@@ -192,7 +192,7 @@ public abstract class BaseYarn {
      * returns the suggested needle size.
      * @return  double
      */
-    public double getNeedleSize() {
+    public double[] getNeedleSize() {
         return this.needleSize;
     }
 
