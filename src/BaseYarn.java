@@ -6,30 +6,46 @@ package src;
  */
 public abstract class BaseYarn {
     /**
+     * is the default value used until value is set.
+     */
+    private final int UNDEFINED_INT = -1;
+    /**
+     * is the default value used until value is set.
+     */
+    private final float UNDEFINED_FLOAT = -1;
+    /**
+     * is the default value used until value is set.
+     */
+    private final YarnType UNDEFINED_YARN_TYPE = null;
+    /**
      * is the weight of yarn skein or 
      * ball in grams. It is rounded to integer value.
+     * By default value is -1;
      */
-    private int unitWeight;
+    private int unitWeight = this.UNDEFINED_INT;
     /**
      * is the approximate length in meters of yarn per
      * skein or ball. It is rounded to integer value.
+     * By default value is -1;
      */
-    private int meterage;
+    private int meterage = this.UNDEFINED_INT;
     /**
      * is approximation of stitches per cm with given
      * needle size. It is rounded to integer value.
+     * By default value is -1;
      */
-    private int gaugeForTenCm;
+    private int gaugeForTenCm = this.UNDEFINED_INT;
     /**
      * is the suggested needle size in mm. It is 
      * a floating point value.
+     * By default value is -1;
      */
-    private float needleSize;
+    private float needleSize = this.UNDEFINED_FLOAT;
     /**
      * is a YarnType that descripes the yarn in 
      * standard yarn weight term.
      */
-    private YarnType yarnType;
+    private YarnType yarnType = this.UNDEFINED_YARN_TYPE;
 
     /**
      * sets unitWeight for yarn.
@@ -68,7 +84,15 @@ public abstract class BaseYarn {
         this.needleSize = needleSize;
     }
 
+    public void setYarnType() {
 
+        if (this.unitWeight != this.UNDEFINED_INT 
+        && this.meterage != this.UNDEFINED_INT) {
+
+            double metersPerHundredGrams = ((double) this.meterage / this.unitWeight) * 100;
+            System.out.println(metersPerHundredGrams);
+        }
+    }
 }
 
 // End of File
