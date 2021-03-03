@@ -190,7 +190,7 @@ public abstract class BaseYarn {
 
     /**
      * returns the suggested needle size.
-     * @return  double
+     * @return  double[]
      */
     public double[] getNeedleSize() {
         return this.needleSize;
