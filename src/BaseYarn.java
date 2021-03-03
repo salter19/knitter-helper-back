@@ -1,7 +1,4 @@
-package src;
-
 import java.util.*;
-import src.YarnType;
 /**
  * BaseYarn is an abstract superclass for different
  * types of yarn. 
@@ -16,7 +13,6 @@ public abstract class BaseYarn {
      * is the default value used until value is set.
      */
     private final double UNDEFINED_DOUBLE = -1;
-
 
     /**
      * is approximation of stitches per cm with given
@@ -77,7 +73,7 @@ public abstract class BaseYarn {
      * @param unitWeight    rounded to integer, the weight value of
      *                      given skein or ball of yarn.
      */
-    public void setUnitWeight(int unitWeight) {
+    void setUnitWeight(int unitWeight) {
         this.unitWeight = unitWeight;
     }
 
@@ -86,7 +82,7 @@ public abstract class BaseYarn {
      * @param meterage  rounded to integer, the length value of
      *                  given skein or ball of yarn.
      */
-    public void setMeterage(int meterage) {
+    void setMeterage(int meterage) {
         this.meterage = meterage;
     }
 
@@ -100,7 +96,7 @@ public abstract class BaseYarn {
      * @param end       rounded to integer, the largest number of 
      *                  stitches needed to cover ten cm in knit surface.
      */
-    public void setGaugeForTenCm(int start, int end) {
+    void setGaugeForTenCm(int start, int end) {
         this.gaugeForTenCm[0] = start;
         this.gaugeForTenCm[1] = end;
     }
@@ -109,7 +105,7 @@ public abstract class BaseYarn {
      * sets suggested needle size for the yarn.
      * @param needleSize    double value of needle size.
      */
-    public void setNeedleSize(double needleSize) {
+    void setNeedleSize(double needleSize) {
         this.needleSize = needleSize;
     }
 
@@ -117,7 +113,7 @@ public abstract class BaseYarn {
      * sets YarnType if unitWeight and meterage are set.
      * YarnType is defined by ratio of meters per grams.
      */
-    public void setYarnType() {
+    void setYarnType() {
 
         if (this.unitWeight != this.UNDEFINED_INT 
         && this.meterage != this.UNDEFINED_INT) {
@@ -159,6 +155,7 @@ public abstract class BaseYarn {
         ranges.put(YarnType.FINGERING, this.RANGE_FINGERING);
         ranges.put(YarnType.SOCK, this.RANGE_SOCK);
         ranges.put(YarnType.SPORT, this.RANGE_SPORT);
+        ranges.put(YarnType.DK, this.RANGE_DK);
         ranges.put(YarnType.ARAN, this.RANGE_ARAN);
         ranges.put(YarnType.CHUNKY, this.RANGE_CHUNKY);
         ranges.put(YarnType.SUPER_CHUNKY, this.RANGE_SUPER_CHUNKY);
