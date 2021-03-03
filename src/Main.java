@@ -18,6 +18,7 @@ public class Main {
 
         BaseYarn sock = new Sock();
         System.out.println(sock.getNeedleSize()[0]);
+        System.out.println(sock);
         
     }
 }
