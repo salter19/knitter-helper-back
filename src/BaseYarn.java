@@ -84,6 +84,10 @@ public abstract class BaseYarn {
         this.needleSize = needleSize;
     }
 
+    /**
+     * sets YarnType if unitWeight and meterage are set.
+     * YarnType is defined by ratio of meters per grams.
+     */
     public void setYarnType() {
 
         if (this.unitWeight != this.UNDEFINED_INT 
