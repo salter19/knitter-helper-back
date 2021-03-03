@@ -1,9 +1,13 @@
 package src;
-
 /**
  * BaseYarn is an abstract superclass for different
  * types of yarn. 
  */
+
+import java.util.HashMap;
+
+import src.YarnType;
+
 public abstract class BaseYarn {
     /**
      * is the default value used until value is set.
@@ -17,6 +21,18 @@ public abstract class BaseYarn {
      * is the default value used until value is set.
      */
     private final YarnType UNDEFINED_YARN_TYPE = null;
+
+    private final int[] RANGE_LACE = {600, 800};
+    private final int[] RANGE_FINGERING = {500, 599};
+    private final int[] RANGE_SOCK = {350, 499};
+    private final int[] RANGE_SPORT = {250, 349};
+    private final int[] RANGE_DK = {200, 249};
+    private final int[] RANGE_ARAN = {120, 199};
+    private final int[] RANGE_CHUNKY = {100, 119};
+    private final int[] RANGE_SUPER_CHUNKY = {60,99};
+
+    private HashMap<YarnType, int[]> ranges = new HashMap<>();
+
     /**
      * is the weight of yarn skein or 
      * ball in grams. It is rounded to integer value.
@@ -46,6 +62,10 @@ public abstract class BaseYarn {
      * standard yarn weight term.
      */
     private YarnType yarnType = this.UNDEFINED_YARN_TYPE;
+
+    public BaseYarn() {
+        this.setRanges();
+    }
 
     /**
      * sets unitWeight for yarn.
@@ -94,8 +114,22 @@ public abstract class BaseYarn {
         && this.meterage != this.UNDEFINED_INT) {
 
             double metersPerHundredGrams = ((double) this.meterage / this.unitWeight) * 100;
-            System.out.println(metersPerHundredGrams);
+            this.yarnType = getYarnType((int)metersPerHundredGrams);
         }
+    }
+
+    // private YarnType getYarnType(int value) {
+        
+    // }
+
+    private void setRanges() {
+        ranges.put(YarnType.LACE, this.RANGE_LACE);
+        ranges.put(YarnType.FINGERING, this.RANGE_FINGERING);
+        ranges.put(YarnType.SOCK, this.RANGE_SOCK);
+        ranges.put(YarnType.SPORT, this.RANGE_SPORT);
+        ranges.put(YarnType.ARAN, this.RANGE_ARAN);
+        ranges.put(YarnType.CHUNKY, this.RANGE_CHUNKY);
+        ranges.put(YarnType.SUPER_CHUNKY, this.RANGE_SUPER_CHUNKY);
     }
 }
 
