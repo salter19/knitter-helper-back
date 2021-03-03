@@ -17,7 +17,6 @@ public class Main {
     public static void main(String[] args) {
 
         BaseYarn lace = new Lace();
-        lace.setYarnType();
-        
+        System.out.println("This is " + lace);
     }
 }
