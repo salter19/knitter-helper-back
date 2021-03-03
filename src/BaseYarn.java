@@ -178,6 +178,14 @@ public abstract class BaseYarn {
     public int getGauge() {
         return this.gaugeForTenCm;
     }
+
+    /**
+     * returns the suggested needle size.
+     * @return  double
+     */
+    public double getNeedleSize() {
+        return this.needleSize;
+    }
 }
 
 // End of File
