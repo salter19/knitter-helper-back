@@ -170,6 +170,14 @@ public abstract class BaseYarn {
     public int getMeterage() {
         return this.meterage;
     }
+
+    /**
+     * returns stitch count (gauge) for ten cm.
+     * @return  int
+     */
+    public int getGauge() {
+        return this.gaugeForTenCm;
+    }
 }
 
 // End of File
