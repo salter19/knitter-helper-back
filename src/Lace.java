@@ -1,6 +1,5 @@
 public class Lace extends BaseYarn {
 
-    private final int DEFAULT_WEIGHT = 100;
     private final int DEFAULT_METERAGE = 800;
     private final double UNDEFINED = -1;
 
@@ -19,7 +18,7 @@ public class Lace extends BaseYarn {
     
     
     public Lace() {
-        this.setUnitWeight(this.DEFAULT_WEIGHT);
+        this.setUnitWeight(DEFAULT_WEIGHT);
         this.setMeterage(this.DEFAULT_METERAGE);
     }
 
