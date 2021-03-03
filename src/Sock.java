@@ -15,3 +15,5 @@ class Sock extends BaseYarn {
         setNeedleSize(this.NEEDLE_SIZE);
     }    
 }
+
+// End of File.
