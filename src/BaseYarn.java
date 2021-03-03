@@ -33,13 +33,21 @@ public abstract class BaseYarn {
 
     /**
      * sets unitWeight for yarn.
-     * @param unitWeight    rounded to integer, the value of
+     * @param unitWeight    rounded to integer, the weight value of
      *                      given skein or ball of yarn.
      */
     public void setUnitWeight(int unitWeight) {
         this.unitWeight = unitWeight;
     }
 
+    /**
+     * sets meterage for yarn.
+     * @param meterage  rounded to integer, the length value of
+     *                  given skein or ball of yarn.
+     */
+    public void setMeterage(int meterage) {
+        this.meterage = meterage;
+    }
 }
 
 // End of File
