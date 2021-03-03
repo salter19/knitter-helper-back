@@ -26,10 +26,10 @@ public abstract class BaseYarn {
      */
     private float needleSize;
     /**
-     * is a String that descripes the yarn in 
-     * standard yarn weight term, if one can be applied.
+     * is a YarnType that descripes the yarn in 
+     * standard yarn weight term.
      */
-    private String weightType;
+    private YarnType yarnType;
 
     /**
      * sets unitWeight for yarn.
@@ -67,6 +67,7 @@ public abstract class BaseYarn {
     public void setNeedleSize(float needleSize) {
         this.needleSize = needleSize;
     }
+
 
 }
 
