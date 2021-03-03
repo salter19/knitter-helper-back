@@ -12,7 +12,7 @@ public abstract class BaseYarn {
     /**
      * is the default value used until value is set.
      */
-    private final float UNDEFINED_FLOAT = -1;
+    private final double UNDEFINED_DOUBLE = -1;
     /**
      * is the default value used until value is set.
      */
@@ -40,7 +40,7 @@ public abstract class BaseYarn {
      * a floating point value.
      * By default value is -1;
      */
-    private float needleSize = this.UNDEFINED_FLOAT;
+    private double needleSize = this.UNDEFINED_DOUBLE;
     /**
      * is a YarnType that descripes the yarn in 
      * standard yarn weight term.
@@ -78,9 +78,9 @@ public abstract class BaseYarn {
 
     /**
      * sets suggested needle size for the yarn.
-     * @param needleSize    float value of needle size.
+     * @param needleSize    double value of needle size.
      */
-    public void setNeedleSize(float needleSize) {
+    public void setNeedleSize(double needleSize) {
         this.needleSize = needleSize;
     }
 
