@@ -1,7 +1,7 @@
 public class Lace extends BaseYarn {
 
     private final int DEFAULT_METERAGE = 800;
-    private final double UNDEFINED = -1;
+    private final double[] UNDEFINED = {-1, -1};
 
     private final String MSG_START = "Needle size for " 
                                     + YarnType.LACE 
@@ -23,13 +23,13 @@ public class Lace extends BaseYarn {
     }
 
     @Override
-    public void setNeedleSize(double size) {
+    public void setNeedleSize(double[] size) {
         Printer p = new Printer();
         p.printMsg(this.MSG_SET_NEEDLE_SIZE);
     }
 
     @Override
-    public double getNeedleSize() {
+    public double[] getNeedleSize() {
         Printer p = new Printer();
         p.printMsg(this.MSG_GET_NEEDLE_SIZE);
         return this.UNDEFINED;
