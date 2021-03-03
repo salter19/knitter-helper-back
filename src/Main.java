@@ -14,8 +14,10 @@ public class Main {
      */
     public static void main(String[] args) {
         BaseYarn lace = new Lace();
-        lace.setNeedleSize(2.5);
-        System.out.println(lace.getNeedleSize());
+        System.out.println(lace.getNeedleSize()[0]);
+
+        BaseYarn sock = new Sock();
+        System.out.println(sock.getNeedleSize()[0]);
         
     }
 }
