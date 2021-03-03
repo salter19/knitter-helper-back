@@ -1,12 +1,11 @@
 package src;
+
+import java.util.*;
+import src.YarnType;
 /**
  * BaseYarn is an abstract superclass for different
  * types of yarn. 
  */
-
-import java.util.*;
-
-import src.YarnType;
 
 public abstract class BaseYarn {
     /**
@@ -18,6 +17,7 @@ public abstract class BaseYarn {
      */
     private final double UNDEFINED_DOUBLE = -1;
 
+    /** are meterage ranges for different yarn types. */
     private final int[] RANGE_LACE = {600, 800};
     private final int[] RANGE_FINGERING = {500, 599};
     private final int[] RANGE_SOCK = {350, 499};
@@ -27,6 +27,10 @@ public abstract class BaseYarn {
     private final int[] RANGE_CHUNKY = {100, 119};
     private final int[] RANGE_SUPER_CHUNKY = {60,99};
 
+    /** 
+     * is the collection that holds YarnTypes and matching 
+     * ranges of meterage as a key - value pair.
+     */
     private HashMap<YarnType, int[]> ranges = new HashMap<>();
 
     /**
@@ -108,10 +112,8 @@ public abstract class BaseYarn {
 
         if (this.unitWeight != this.UNDEFINED_INT 
         && this.meterage != this.UNDEFINED_INT) {
-            System.out.println(this.yarnType);
             double metersPerHundredGrams = ((double) this.meterage / this.unitWeight) * 100;
             this.yarnType = setYarnTypeByRatio((int)metersPerHundredGrams);
-            System.out.println(this.yarnType);
         }
     }
 
@@ -140,6 +142,9 @@ public abstract class BaseYarn {
         return YarnType.UNDEFINED;
     }
 
+    /**
+     * sets elements into HashMap<YarnType, int[]> ranges.
+     */
     private void setRanges() {
         ranges.put(YarnType.LACE, this.RANGE_LACE);
         ranges.put(YarnType.FINGERING, this.RANGE_FINGERING);
