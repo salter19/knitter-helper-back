@@ -17,6 +17,14 @@ public abstract class BaseYarn {
      */
     private final double UNDEFINED_DOUBLE = -1;
 
+
+    /**
+     * is approximation of stitches per cm with given
+     * needle size. It is a tight range with smallest
+     * stitches count and largest one.
+     */
+    private int[] gaugeForTenCm = new int[2];
+
     /** are meterage ranges for different yarn types. */
     private final int[] RANGE_LACE = {600, 800};
     private final int[] RANGE_FINGERING = {500, 599};
@@ -46,12 +54,6 @@ public abstract class BaseYarn {
      */
     private int meterage = this.UNDEFINED_INT;
     /**
-     * is approximation of stitches per cm with given
-     * needle size. It is rounded to integer value.
-     * By default value is -1;
-     */
-    private int gaugeForTenCm = this.UNDEFINED_INT;
-    /**
      * is the suggested needle size in mm. It is 
      * a floating point value.
      * By default value is -1;
@@ -63,6 +65,9 @@ public abstract class BaseYarn {
      */
     private YarnType yarnType = YarnType.UNDEFINED;
 
+    /**
+     * is the constructor.
+     */
     public BaseYarn() {
         this.setRanges();
     }
@@ -85,15 +90,19 @@ public abstract class BaseYarn {
         this.meterage = meterage;
     }
 
+
     /**
-     * sets the approximated number of stitches needed to 
+     * sets the approximated number of stitches needed to
      * cover ten cm in knit surface.
      * 
-     * @param stitchCount   rounded to integer, the number of
-     *                      stitches for ten cm in knit.
+     * @param start     rounded to integer, the smallest number of
+     *                  stitches needed to cover ten cm in knit surface.
+     * @param end       rounded to integer, the largest number of 
+     *                  stitches needed to cover ten cm in knit surface.
      */
-    public void setGaugeForTenCm(int stitchCount) {
-        this.gaugeForTenCm = stitchCount;
+    public void setGaugeForTenCm(int start, int end) {
+        this.gaugeForTenCm[0] = start;
+        this.gaugeForTenCm[1] = end;
     }
 
     /**
@@ -172,10 +181,12 @@ public abstract class BaseYarn {
     }
 
     /**
-     * returns stitch count (gauge) for ten cm.
-     * @return  int
+     * returns stitch count (gauge) for ten cm. 
+     * int[] includes two values, the smallest count
+     * and the largest one.
+     * @return  int[]
      */
-    public int getGauge() {
+    public int[] getGauge() {
         return this.gaugeForTenCm;
     }
 
@@ -193,6 +204,11 @@ public abstract class BaseYarn {
      */
     public YarnType getYarnType() {
         return this.yarnType;
+    }
+
+    @Override
+    public String toString() {
+        return this.yarnType + "";
     }
 }
 
