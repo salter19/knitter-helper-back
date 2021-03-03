@@ -1,7 +1,4 @@
 package src;
-// To run the javadoc:
-// create html/ to root
-// javadoc -d /html Main.java
 
 /**
  * This is the entry point class to run the program.
@@ -18,6 +15,9 @@ public class Main {
      *                of String array.
      */
     public static void main(String[] args) {
+
+        BaseYarn lace = new Lace();
+        lace.setYarnType();
         
     }
 }
