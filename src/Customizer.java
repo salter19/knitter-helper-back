@@ -19,6 +19,9 @@ public class Customizer {
      * @param instruction   Instruction     The instruction of the knit piece.
      */
     public Customizer(CustomYarn customYarn, Instruction instruction) {
+        
+        // TODO: Handle exception YarnType Lace 
+
         /** the smallest end of the gauge regarding the yarn to be used. */
         this.customGauge = customYarn.getGauge()[0];
 
