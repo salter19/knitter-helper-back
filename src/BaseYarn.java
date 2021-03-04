@@ -1,4 +1,6 @@
-import java.util.HashMap;
+import java.util.*;
+import java.util.Map.Entry;
+
 
 /**
  * BaseYarn is an abstract superclass for yarn.
@@ -103,8 +105,29 @@ public abstract class BaseYarn {
                 .put(YarnType.SUPER_CHUNKY, this.RANGE_SUPER_CHUNKY);
         }
 
+        /**
+         * returns the range of the gauge for given YarnType.
+         * If YarnType cannot be computed, returns an empty array.
+         * @param _yarnType YarnType
+         * @return          int[]
+         */
+        int[] getGauge(YarnType _yarnType) {
+            Iterator<Entry<YarnType, int[]>> iterator = 
+                this.gaugeRanges.entrySet().iterator();
 
-        
+            while(iterator.hasNext()) {
+                Map.Entry<YarnType, int[]> mapElement = 
+                    (Map.Entry<YarnType, int[]>)iterator.next();
+            
+                YarnType yarnType =  (YarnType) mapElement.getKey();
+
+                if (_yarnType == yarnType) {
+                    return (int[]) mapElement.getValue();
+                }
+                
+            }
+            return this.RANGE_UNDEFINED;
+        } 
     }
 
     /**
@@ -150,3 +173,5 @@ public abstract class BaseYarn {
     }
 
 }
+
+// End of File.
