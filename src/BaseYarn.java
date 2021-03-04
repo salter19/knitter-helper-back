@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 /**
  * BaseYarn is an abstract superclass for yarn.
  */
@@ -54,6 +56,55 @@ public abstract class BaseYarn {
         this.weight = weight;
         this.meterage = meterage;
         this.yarnType = this.getYarnTypeBasedOnMeterage();
+    }
+
+    private class Gauge {
+        /**
+         * Standard gauge ranges for yarn types.
+         */
+        private final int[] RANGE_FINGERING = {33, 40};
+        private final int[] RANGE_SOCK = {27, 32};
+        private final int[] RANGE_SPORT = {24, 26};
+        private final int[] RANGE_DK = {21, 23};
+        private final int[] RANGE_ARAN = {16, 20};
+        private final int[] RANGE_CHUNKY = {12, 15};
+        private final int[] RANGE_SUPER_CHUNKY = {7, 11};
+
+        /** Use RANGE_UNDEFINED, if no gauge range is or can be defined. */
+        private final int[] RANGE_UNDEFINED = {};
+
+        /** Match YarnType to its standard gauge */
+        HashMap <YarnType, int[]> gaugeRanges = new HashMap<YarnType, int[]>();
+
+        /**
+         * is constructor for private inner class.
+         */
+        public Gauge() {
+            setGaugeRanges();
+        }
+
+        /**
+         * sets key - value pairs matching YarnType for its standard gauge.
+         * 
+         * YarnType.LACE is an exception. It is of a very fine thickness and 
+         * as such, usually knitted with some what bigger needles. Thus, its 
+         * gauge has no standard value.
+         */
+        private void setGaugeRanges() {
+
+            this.gaugeRanges.put(YarnType.LACE, this.RANGE_UNDEFINED);
+            this.gaugeRanges.put(YarnType.FINGERING, this.RANGE_FINGERING);
+            this.gaugeRanges.put(YarnType.SOCK, this.RANGE_SOCK);
+            this.gaugeRanges.put(YarnType.SPORT, this.RANGE_SPORT);
+            this.gaugeRanges.put(YarnType.DK, this.RANGE_DK);
+            this.gaugeRanges.put(YarnType.ARAN, this.RANGE_ARAN);
+            this.gaugeRanges.put(YarnType.CHUNKY, this.RANGE_CHUNKY);
+            this.gaugeRanges
+                .put(YarnType.SUPER_CHUNKY, this.RANGE_SUPER_CHUNKY);
+        }
+
+
+        
     }
 
     /**
