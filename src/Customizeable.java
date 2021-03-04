@@ -1,12 +1,15 @@
 /**
  * Customizeable is an interface for Objects that need a custom value counter.
  */
+@FunctionalInterface
 public interface Customizeable {
     /**
-     * returns custom value in typeof double.
+     * returns custom value (double) created based on two given values.
+     * @param a double  The first value of the operation.
+     * @param b double  The second value of the operation.
      * @return  double  The custom value.
      */
-    double getCustomValue();
+    double getCustomValue(double a, double b);
 }
 
 // End of File.
