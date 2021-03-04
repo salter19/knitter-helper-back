@@ -1,6 +1,10 @@
 import java.util.*;
 import java.util.Map.Entry;
 
+/**
+ * NeedleSizeRange is a class used for setting the standard needle size based 
+ * on yarn thickness (yarn type). 
+ */
 public class NeedleSizeRange {
     
     /** are needle size (mm) ranges for different yarn types. */
@@ -28,6 +32,7 @@ public class NeedleSizeRange {
     public NeedleSizeRange() {
         setRangesNeedleSize();
     }
+
     /**
      * returns the standard needle size range of given YarnType.
      * @param   yarnType  YarnType given.
@@ -50,6 +55,33 @@ public class NeedleSizeRange {
         return this.UNDEFINED_RANGE;
     }
 
+     /**
+     * gets YarnType based on the given needle size.
+     * 
+     * Compares given needleSize to rangesNeedleSize values and returns
+     * key (YarnType) of the value range where given needle size resides.
+     * Returns YarnType.UNDEFINED if given needle size cannot be found.
+     * 
+     * @param needleSize    double needle size given.
+     * @return              YarnType
+     */
+    public YarnType getYarnType(double needleSize) {
+        Iterator<Entry<YarnType, double[]>> iterator = 
+            this.rangesNeedleSize.entrySet().iterator();
+
+        while(iterator.hasNext()) {
+            Map.Entry<YarnType, double[]> mapElement = 
+                (Map.Entry<YarnType, double[]>)iterator.next();
+        
+            double[] range =  (double[])mapElement.getValue();
+
+            if (needleSize >= range[0] && needleSize <= range[1]) {
+                return (YarnType) mapElement.getKey();
+            }
+        }
+        return YarnType.UNDEFINED;
+    }
+
     /**
      * sets elements into HashMap<YarnType, double[]> rangesNeedleSize.
      * 
@@ -65,3 +97,5 @@ public class NeedleSizeRange {
         rangesNeedleSize.put(YarnType.SUPER_CHUNKY, this.RANGE_SUPER_CHUNKY);
     }
 }
+
+// End of File.
