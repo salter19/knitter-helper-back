@@ -90,4 +90,12 @@ public abstract class BaseYarn {
         return this.weight;
     }
 
+    /**
+     * return the meterage of the yarn in meters.
+     * @return  int
+     */
+    public int getMeterage() {
+        return this.meterage;
+    }
+
 }
