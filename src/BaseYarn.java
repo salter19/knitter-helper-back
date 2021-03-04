@@ -50,9 +50,17 @@ public abstract class BaseYarn {
      */
     private int[] gauge;
 
+    /**
+     * is the standard range of needle size per yarn type. YarnType.LACE is and 
+     * exception, as it has no standard needle size.
+     */
+    private double[] needleSize;
+
 
     /** Initate helper object meterageRange. */
     private MeterageRange meterageRange = new MeterageRange();
+
+    private NeedleSizeRange needleSizeRange = new NeedleSizeRange();
 
     /**
      * is the constructor, which sets the weight and meterage of yarn in 
@@ -66,6 +74,7 @@ public abstract class BaseYarn {
         this.meterage = meterage;
         this.yarnType = this.getYarnTypeBasedOnMeterage();
         this.gauge = new Gauge().getGauge(this.yarnType);
+        this.needleSize = this.needleSizeRange.getRange(this.yarnType);
     }
 
     /**
