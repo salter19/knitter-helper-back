@@ -1,6 +1,8 @@
 import java.util.*;
 import java.util.Map.Entry;
 
+import javax.xml.crypto.dsig.keyinfo.RetrievalMethod;
+
 
 /**
  * BaseYarn is an abstract superclass for yarn.
@@ -199,6 +201,14 @@ public abstract class BaseYarn {
      */
     public int[] getGauge() {
         return this.gauge;
+    }
+
+    /**
+     * returns the range of suggested needle size for the yarn.
+     * @return  double[]
+     */
+    public double[] getNeedleSize() {
+        return this.needleSize;
     }
 
 }
