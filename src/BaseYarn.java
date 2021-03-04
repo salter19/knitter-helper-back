@@ -82,4 +82,12 @@ public abstract class BaseYarn {
         return this.yarnType;
     }
 
+    /**
+     * returns weight of the yarn in grams.
+     * @return  int
+     */
+    public int getWeight() {
+        return this.weight;
+    }
+
 }
