@@ -74,7 +74,7 @@ public abstract class BaseYarn {
      * @param unitWeight rounded to integer, the weight value of given skein or ball
      *                   of yarn.
      */
-    void setUnitWeight(int unitWeight) {
+    public void setUnitWeight(int unitWeight) {
         this.unitWeight = unitWeight;
     }
 
@@ -84,7 +84,7 @@ public abstract class BaseYarn {
      * @param meterage rounded to integer, the length value of given skein or ball
      *                 of yarn.
      */
-    void setMeterage(int meterage) {
+    public void setMeterage(int meterage) {
         this.meterage = meterage;
     }
 
@@ -97,7 +97,7 @@ public abstract class BaseYarn {
      * @param end   rounded to integer, the largest number of stitches needed to
      *              cover ten cm in knit surface.
      */
-    void setGaugeForTenCm(int start, int end) {
+    public void setGaugeForTenCm(int start, int end) {
         this.gaugeForTenCm[0] = start;
         this.gaugeForTenCm[1] = end;
     }
@@ -107,7 +107,7 @@ public abstract class BaseYarn {
      * 
      * @param needleSize double[] with limit values of needle size.
      */
-    void setNeedleSize(double[] needleSize) {
+    public void setNeedleSize(double[] needleSize) {
         this.needleSize = needleSize;
     }
 
@@ -115,7 +115,7 @@ public abstract class BaseYarn {
      * sets YarnType if unitWeight and meterage are set. YarnType is defined by
      * ratio of meters per grams.
      */
-    void setYarnType() {
+    public void setYarnType() {
 
         if (this.unitWeight != this.UNDEFINED_INT 
             && this.meterage != this.UNDEFINED_INT) {

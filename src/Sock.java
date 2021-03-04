@@ -6,7 +6,7 @@
  * @author Terhi Salonen
  * @version 1.0
  */
-class Sock extends BaseYarn {
+public class Sock extends BaseYarn {
 
     /**
      * are standard default values for sock type of yarn.
