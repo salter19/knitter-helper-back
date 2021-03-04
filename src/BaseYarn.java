@@ -43,6 +43,13 @@ public abstract class BaseYarn {
      */
     private YarnType yarnType;
 
+    /**
+     * is the standard gauge, stitches per ten cm, for the yarn based on its 
+     * type. YarnType.LACE is an exception, as it has no standard gauge.
+     * 
+     */
+    private int[] gauge;
+
 
     /** Initate helper object meterageRange. */
     private MeterageRange meterageRange = new MeterageRange();
@@ -58,6 +65,7 @@ public abstract class BaseYarn {
         this.weight = weight;
         this.meterage = meterage;
         this.yarnType = this.getYarnTypeBasedOnMeterage();
+        this.gauge = new Gauge().getGauge(this.yarnType);
     }
 
     private class Gauge {
@@ -165,11 +173,19 @@ public abstract class BaseYarn {
     }
 
     /**
-     * return the meterage of the yarn in meters.
+     * returns the meterage of the yarn in meters.
      * @return  int
      */
     public int getMeterage() {
         return this.meterage;
+    }
+
+    /**
+     * returns the gauge of the yarn.
+     * @return int[]
+     */
+    public int[] getGauge() {
+        return this.gauge;
     }
 
 }
