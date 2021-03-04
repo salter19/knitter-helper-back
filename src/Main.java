@@ -17,12 +17,18 @@ public class Main {
         BaseYarn instructionalYarn = 
             new InstructionalYarn(BaseYarn.DEFAULT_WEIGHT_FIFTY, 150);
 
-        BaseYarn customYarn = 
-            new CustomYarn(BaseYarn.DEFAULT_WEIGHT_TWENTYFIVE, 150);
+        CustomYarn customYarn = 
+            new CustomYarn(BaseYarn.DEFAULT_WEIGHT_TWENTYFIVE, 50);
         
         Printer p = new Printer();
         p.printMsg("" + instructionalYarn.getYarnType());
         p.printMsg("" + customYarn.getYarnType());
+
+        Customizer customizer = new Customizer(customYarn, new Instruction(17, 235));
+
+        p.printMsg("customized stitch count: " 
+                    + customizer.getCustomStitchCount()
+                    + " (the original stitch count: 235)");
     }
 }
 
