@@ -36,7 +36,8 @@ public class MeterageRange {
 
     /**
      * returns the meterage range of given YarnType. Prescision in meters.
-     * @param yarnType  YarnType given.
+     * @param   yarnType  YarnType given.
+     * @return  int[]
      */
     public int[] getRange(YarnType yarnType) {
         Iterator<Entry<YarnType, int[]>> iterator = 
