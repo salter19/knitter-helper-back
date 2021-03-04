@@ -7,12 +7,28 @@
 public class Printer {
 
     /**
-     * outputs given message(msg) with line change
-     * at the end.
-     * @param msg   String format message given.
+     * outputs given message(msg) with line change at the end.
+     * 
+     * @param msg String format message given.
      */
     public void printMsg(String msg) {
         System.out.println(msg);
+    }
+
+    /**
+     * outputs given value with line change at the end.
+     * @param value int value given.
+     */
+    public void printInt(int value) {
+        System.out.println(value);
+    }
+
+    /**
+     * outputs given value with line change at the end.
+     * @param value double value given.
+     */
+    public void printDouble(double value) {
+        System.out.println(value);
     }
 }
 
