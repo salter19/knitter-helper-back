@@ -53,7 +53,7 @@ public abstract class BaseYarn {
 
         this.weight = weight;
         this.meterage = meterage;
-        this.yarnType = this.getYarnType();
+        this.yarnType = this.getYarnTypeBasedOnMeterage();
     }
 
     /**
@@ -62,7 +62,7 @@ public abstract class BaseYarn {
      * 
      * @return  YarnType
      */
-    private YarnType getYarnType() {
+    private YarnType getYarnTypeBasedOnMeterage() {
 
         if (this.weight != this.UNDEFINED_INT 
         && this.meterage != this.UNDEFINED_INT) {
@@ -72,6 +72,14 @@ public abstract class BaseYarn {
             return this.meterageRange.getYarnType((int)metersPerHundredGrams);
         }
         return YarnType.UNDEFINED;
+    }
+
+    /**
+     * returns YarnType.
+     * @return  YarnType
+     */
+    public YarnType getYarnType() {
+        return this.yarnType;
     }
 
 }
