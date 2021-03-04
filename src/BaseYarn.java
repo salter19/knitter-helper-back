@@ -68,6 +68,10 @@ public abstract class BaseYarn {
         this.gauge = new Gauge().getGauge(this.yarnType);
     }
 
+    /**
+     * private inner class Gauge is used to set the gauge for yarn in question 
+     * based on its YarnType.
+     */
     private class Gauge {
         /**
          * Standard gauge ranges for yarn types.
