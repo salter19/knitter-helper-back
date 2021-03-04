@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.Map.Entry;
 
 public class NeedleSizeRange {
     
@@ -21,16 +22,36 @@ public class NeedleSizeRange {
     private HashMap<YarnType, double[]> rangesNeedleSize = 
         new HashMap<YarnType, double[]>();
 
-
     /**
      * is the constructor.
      */
     public NeedleSizeRange() {
         setRangesNeedleSize();
     }
+    /**
+     * returns the standard needle size range of given YarnType.
+     * @param   yarnType  YarnType given.
+     * @return  double[]
+     */
+    public double[] getRange(YarnType yarnType) {
+        Iterator<Entry<YarnType, double[]>> iterator = 
+            this.rangesNeedleSize.entrySet().iterator();
+
+        while(iterator.hasNext()) {
+            Map.Entry<YarnType, double[]> mapElement = 
+                (Map.Entry<YarnType, double[]>)iterator.next();
+        
+            YarnType yarn = (YarnType)mapElement.getKey();
+
+            if (yarnType == yarn) {
+                return (double[]) mapElement.getValue();
+            } 
+        }
+        return this.UNDEFINED_RANGE;
+    }
 
     /**
-     * sets elements into HashMap<YarnType, int[]> rangesNeedleSize.
+     * sets elements into HashMap<YarnType, double[]> rangesNeedleSize.
      * 
      */
     private void setRangesNeedleSize() {
