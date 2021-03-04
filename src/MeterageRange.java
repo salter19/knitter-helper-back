@@ -57,6 +57,33 @@ public class MeterageRange {
     }
 
     /**
+     * gets YarnType based on the given meterage.
+     * 
+     * Compares given meterage to rangesMeterage values and returns
+     * key (YarnType) of the value range where given meterage resides.
+     * Returns YarnType.UNDEFINED if given meterage cannot be found.
+     * 
+     * @param meterage  int given meterage to be compared.
+     * @return          YarnType
+     */
+    public YarnType getYarnType(int meterage) {
+        Iterator<Entry<YarnType, int[]>> iterator = 
+            this.rangesMeterage.entrySet().iterator();
+
+        while(iterator.hasNext()) {
+            Map.Entry<YarnType, int[]> mapElement = 
+                (Map.Entry<YarnType, int[]>)iterator.next();
+        
+            int[] range =  (int[])mapElement.getValue();
+
+            if (meterage >= range[0] && meterage <= range[1]) {
+                return (YarnType) mapElement.getKey();
+            }
+        }
+        return YarnType.UNDEFINED;
+    }
+
+    /**
      * sets elements into HashMap<YarnType, int[]> rangesMeterage.
      */
     private void setRangesMetrage() {
