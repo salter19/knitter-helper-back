@@ -13,12 +13,6 @@ public class Main {
      *                of String array.
      */
     public static void main(String[] args) {
-        BaseYarn lace = new Lace();
-        System.out.println(lace.getNeedleSize()[0]);
-
-        BaseYarn sock = new Sock();
-        System.out.println(sock.getNeedleSize()[0]);
-        System.out.println(sock);
         
     }
 }
