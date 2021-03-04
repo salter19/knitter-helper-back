@@ -25,7 +25,15 @@ public class Customizer {
         /** the width to aim at */
         this.widthInCm = instruction.getWidthInCm();
 
+        /** set the custom stitch count */
+        setCustomStitchCount();
+    }
 
+    /**
+     * sets the custom stitch count based on custom yarn's gauge and the width
+     * of the knit piece.
+     */
+    private void setCustomStitchCount() {
         int gaugeWidth = 10;
 
         /** lamda expression to implement functional interface Customizeable */
