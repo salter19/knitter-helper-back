@@ -3,8 +3,18 @@
  */
 public abstract class BaseYarn {
     /**
-     * DEFAULT_WEIGHT is the standard weight in grams for a ball or skein of
-     * yarn.
+     * DEFAULT_WEIGHT_HUNDRED is a standard weight in grams for a ball or
+     * a skein of yarn.
      */
-    public static final int DEFAULT_WEIGHT = 100;
+    public static final int DEFAULT_WEIGHT_HUNDRED = 100;
+    /**
+     * DEFAULT_WEIGHT_FIFTY is a standard weight in grams for a ball or
+     * a skein of yarn.
+     */
+    public static final int DEFAULT_WEIGHT_FIFTY = 50;
+    /**
+     * DEFAULT_WEIGHT_TWENTYFIVE is a standard weight in grams for a ball or
+     * a skein of yarn.
+     */
+    public static final int DEFAULT_WEIGHT_TWENTYFIVE = 25;
 }
