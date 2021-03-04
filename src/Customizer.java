@@ -4,37 +4,48 @@
  */
 public class Customizer {
 
-    /** is the yarn used in the instruction. */
-    private InstructionalYarn yarn;
-
-    /** is the count of stitches used in the instruction. */
-    private int stitchCount;
-
     /** is the width of the piece knitted in cm.*/
     private double widthInCm;
     
-    /** is the custom yarn to be used. */
-    private CustomYarn customYarn;
+    /** is the gauge (stitches / 10 cm) with the yarn to be used. */
+    private int customGauge;
 
     /** is the customized count of stitches needed. */
     private int customStitchCount;
 
     /**
      * is the constructor.
-     * @param yarn          InstructionalYarn   The yarn in the instruction.
-     * @param customYarn    CustomYarn          The yarn of the user.
-     * @param widthInCm     double              The width (cm) to be knitted.
+     * @param customYarn    CustomYarn      The yarn to be used.
+     * @param instruction   Instruction     The instruction of the knit piece.
      */
-    public Customizer(
-        InstructionalYarn yarn, 
-        CustomYarn customYarn, 
-        double widthInCm) {
+    public Customizer(CustomYarn customYarn, Instruction instruction) {
+        /** the smallest end of the gauge regarding the yarn to be used. */
+        this.customGauge = customYarn.getGauge()[0];
 
-        this.yarn = yarn;
-        this.customYarn = customYarn;
-        this.widthInCm = widthInCm;
+        /** the width to aim at */
+        this.widthInCm = instruction.getWidthInCm();
+
+
+        int gaugeWidth = 10;
+
+        /** lamda expression to implement functional interface Customizeable */
+        Customizeable countStitches = 
+            (double a, double b) -> a / gaugeWidth * b; 
+
+        /** Call the above lamda expression */
+        this.customStitchCount = 
+            (int) countStitches
+            .getCustomValue(this.widthInCm, this.customGauge);
     }
 
+    /**
+     * returns the customized stitch count.
+     * @return  int The stitch count counted based on the custom yarn's gauge
+     *              and width of the knit piece.
+     */
+    public int getCustomStitchCount() {
+        return this.customStitchCount;
+    }
     
 }
 
