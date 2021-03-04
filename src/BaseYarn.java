@@ -1,9 +1,5 @@
 import java.util.*;
 import java.util.Map.Entry;
-
-import javax.xml.crypto.dsig.keyinfo.RetrievalMethod;
-
-
 /**
  * BaseYarn is an abstract superclass for yarn.
  */
