@@ -1,6 +1,9 @@
 /**
  * CustomYarn is used as the yarn to be fitted in place of the instructional
  * yarn. It is inherited from BaseYarn class.
+ * 
+ * @author Terhi Salonen
+ * @version 1.0
  */
 public class CustomYarn extends BaseYarn {
 
