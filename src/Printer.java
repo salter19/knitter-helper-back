@@ -36,7 +36,7 @@ public class Printer {
      * @param msg   String  Message given in String format.
      */
     public void printMsgWithoutLn(String msg) {
-        System.out.println(msg);
+        System.out.print(msg);
     }
 }
 
