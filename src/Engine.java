@@ -72,8 +72,12 @@ public class Engine {
      */
     private void routeNextAction(boolean isOn, String input) {
         if (isOn) {
+
+            CustomYarn userYarn = getUserYarn();
+            Instruction instruction =  getInstruction();
+
             if (input.equals(this.options.get(1))) {
-                CustomCount();
+                CustomCount(userYarn, instruction);
             }
             if (input.equals(this.options.get(2))) {
                 printer.printMsg("invoke width counter");
@@ -86,17 +90,18 @@ public class Engine {
 
     /**
      * is action option to output the custom stitch count for knit piece.
+     * @param userYarn      CustomYarn      The yarn of the user.
+     * @param instruction   Instruction     The instruction to be customized to
+     *                                      fit user's yarn.
      */
-    private void CustomCount() {
+    private void CustomCount(CustomYarn userYarn, Instruction instruction) {
 
         printer.printMsg("Custom Stitch Counter");
-
-        CustomYarn userYarn = getUserYarn();
-        Instruction instruction =  getInstruction();
 
         if (userYarn != null && instruction != null) {
             Customizer customizer = new Customizer(userYarn, instruction);
             int customCount = customizer.getCustomStitchCount();
+
             printer.printMsg("The stitch count for your yarn is " 
                                 + customCount 
                                 + "\n(The stitch count in the instruction was " + instruction.getStitchCount() + ")");
