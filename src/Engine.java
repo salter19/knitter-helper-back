@@ -66,6 +66,11 @@ public class Engine {
     }
 
 
+    /**
+     * checks whether the user has given a valid command. If so, outputs a
+     * message informing the user.
+     * @param input String  User input to be evaluated.
+     */
     private void checkInputForNonCommand(String input) {
         if (!this.options.contains(input) 
             && !input.equals(this.options.get(0).toUpperCase())) {
