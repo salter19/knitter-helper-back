@@ -29,6 +29,9 @@ public class Main {
         p.printMsg("customized stitch count: " 
                     + customizer.getCustomStitchCount()
                     + " (the original stitch count: 235)");
+
+        Engine engine = new Engine();
+        engine.run();
     }
 }
 
