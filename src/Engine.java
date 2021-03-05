@@ -49,18 +49,17 @@ public class Engine {
         String input = "";
 
         printer.printMsg("Hello!\nThis is Stitch Counter 1.0");
+       
 
         while (isOn) {
-            input = getCommand();
 
-            checkInputForNonCommand(input);
-
+            input = getCommand(input);
             isOn = checkInputForExitCommand(isOn, input); 
 
-            if (isOn) {
+            if (!checkInputForNonCommand(input) && isOn) {
                 routeNextAction(input);
-            }
-            
+                isOn = false;
+            } 
         }
         scanner.close();
         System.exit(0);
@@ -73,25 +72,37 @@ public class Engine {
     private void routeNextAction(String input) {
 
         if (input.equals(this.options.get(1))) {
-            printer.printMsg("Set your chosen yarn");
-            CustomYarn userYarn = getUserYarn();
+            CustomYarn userYarn = userYarnSetter();
 
             printer.printMsg("Set the instruction");
             Instruction instruction =  getInstruction();
             CustomCount(userYarn, instruction);
+            
 
         } else if (input.equals(this.options.get(2))) {
-            printer.printMsg("Set your chosen yarn");
-            CustomYarn userYarn = getUserYarn();
+            CustomYarn userYarn = userYarnSetter();
 
-            printer.printMsg("Set width counter");
+            printer.printMsg("Set the width counter");
             widthCounter(userYarn); 
 
         } else if (input.equals(this.options.get(3))) {
-            printer.printMsg("invoke yarn type getter");
+            CustomYarn userYarn = userYarnSetter();
+
+            printer.printMsg("The type of your yarn seems to be " 
+                            + userYarn.getYarnType());
         } 
     }
 
+
+    /**
+     * sets CustomYarn object. 
+     * @return  CustomYarn  The users yarn specs.
+     */
+    private CustomYarn userYarnSetter() {
+        printer.printMsg("Set your chosen yarn");
+        CustomYarn userYarn = getUserYarn();
+        return userYarn;
+    }
 
     /**
      * counts the width achieved with given yarn and stitch count.
@@ -262,12 +273,15 @@ public class Engine {
      * returns users command input.
      * @return  String  User input.
      */
-    private String getCommand() {
-        String input;
+    private String getCommand(String input) {
+
         printer.printMsg("\n" + this.CHOICES_MSG
         + "\n");
-        printer.printMsgWithoutLn("What do you want to do?\n> ");
-        input = scanner.nextLine();
+        printer.printMsg("What do you want to do?");
+        input = this.scanner.nextLine();
+
+        System.out.println("At get comm, input is " + input);
+        
         return input;
     }
 
@@ -279,6 +293,7 @@ public class Engine {
      * @return          boolean     Returns true if invalid command is given.
      */
     private boolean checkInputForNonCommand(String input) {
+
         if (!this.options.contains(input) 
             && !input.equals(this.options.get(0).toUpperCase())) {
 
