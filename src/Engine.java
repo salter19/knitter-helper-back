@@ -123,17 +123,39 @@ public class Engine {
     }
 
     /**
-     * returns CustomYarn object, if weight and meterage are acceptable.
-     * Else returns null
-     * @return  CustomYarn  Either CustomYarn based on weight and meterage
-     *                      or null object.
+     * returns Instruction object or null object depending on the given
+     * instructional gauge and total stitch count.
+     * @return  Instruction     Either Instruction based on gauge and total 
+     *                          stitch count or null object.
      */
-    private Instruction getInstruction(CustomYarn userYarn) {
-        int gauge;
-        getGauge();
+    private Instruction getInstruction() {
+        int gauge = getGauge();
+        int stitchCount = getTotalStitchCount();
+
+        if (gauge > 0 && stitchCount > 0) {
+            return new Instruction(gauge, stitchCount);
+        }
         return null;
     }
 
+    /**
+     * returns total stitch count of the instruction.
+     * @return  int     The total stitch count, or if cannot be computed, -1.
+     */
+    private int getTotalStitchCount() {
+        int count = -1;
+        printer.printMsgWithoutLn("Please, insert the amount of stitches in " 
+                                + "the instruction in total:\n> ");
+
+        try {
+            // TODO: handle total stitch count zero
+            count = scanner.nextInt();
+        } catch (Exception e) {
+            System.err.println("Not valid value for total stitch count");
+            System.err.println(e.getStackTrace());
+        }
+        return count; 
+    }
 
     /**
      * returns gauge for 10 cm or -1, if cannot compute.
