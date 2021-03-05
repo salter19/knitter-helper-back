@@ -1,5 +1,8 @@
 /**
  * Customizeable is an interface for Objects that need a custom value counter.
+ * 
+ * @author Terhi Salonen
+ * @version 1.0
  */
 @FunctionalInterface
 public interface Customizeable {
