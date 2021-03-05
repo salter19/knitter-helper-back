@@ -53,7 +53,7 @@ public class Engine {
 
         while (isOn) {
 
-            input = getCommand(input);
+            input = getCommand();
             isOn = checkInputForExitCommand(isOn, input); 
 
             if (!checkInputForNonCommand(input) && isOn) {
@@ -68,6 +68,8 @@ public class Engine {
 
     /**
      * routes next action based on users command.
+     * 
+     * @param input   String     User input. 
      */
     private void routeNextAction(String input) {
 
@@ -92,7 +94,6 @@ public class Engine {
                             + userYarn.getYarnType());
         } 
     }
-
 
     /**
      * sets CustomYarn object. 
@@ -273,14 +274,12 @@ public class Engine {
      * returns users command input.
      * @return  String  User input.
      */
-    private String getCommand(String input) {
+    private String getCommand() {
 
         printer.printMsg("\n" + this.CHOICES_MSG
         + "\n");
         printer.printMsg("What do you want to do?");
-        input = this.scanner.nextLine();
-
-        System.out.println("At get comm, input is " + input);
+        String input = this.scanner.nextLine();
         
         return input;
     }
