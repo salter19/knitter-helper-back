@@ -3,6 +3,9 @@ import java.util.Map.Entry;
 
 /**
  * MeterageRange is a class that matches YarnTypes to their meterage.
+ * 
+ * @author Terhi Salonen
+ * @version 1.0
  */
 public class MeterageRange {
     
