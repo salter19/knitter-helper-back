@@ -33,6 +33,9 @@ public class Engine {
     }
 
 
+    /**
+     * sets options from options_arr into options.
+     */
     private void setOptionsArrayList() {
 
         for(String s : this.options_arr) {
