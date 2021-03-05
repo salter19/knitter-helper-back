@@ -172,7 +172,6 @@ public class Engine {
 
         if (weight > 0 && meterage > 0) {
             userYarn = new CustomYarn(weight, meterage);
-            printer.printMsg("Your yarn is " + userYarn.getYarnType());
         } else {
             return null;
         }
