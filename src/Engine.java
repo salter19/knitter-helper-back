@@ -73,7 +73,7 @@ public class Engine {
     private void routeNextAction(boolean isOn, String input) {
         if (isOn) {
             if (input.equals(this.options.get(1))) {
-                getCustomCount();
+                CustomCount();
             }
             if (input.equals(this.options.get(2))) {
                 printer.printMsg("invoke width counter");
@@ -84,17 +84,22 @@ public class Engine {
         }
     }
 
-
-    private void getCustomCount() {
-        int weight = 0;
-        int meterage = 0;
+    /**
+     * is action option to output the custom stitch count for knit piece.
+     */
+    private void CustomCount() {
 
         printer.printMsg("Custom Stitch Counter");
 
         CustomYarn userYarn = getUserYarn();
+        Instruction instruction =  getInstruction();
 
-        if (userYarn != null) {
-
+        if (userYarn != null && instruction != null) {
+            Customizer customizer = new Customizer(userYarn, instruction);
+            int customCount = customizer.getCustomStitchCount();
+            printer.printMsg("The stitch count for your yarn is " 
+                                + customCount 
+                                + "\n(The stitch count in the instruction was " + instruction.getStitchCount() + ")");
         }
         
     }
@@ -164,13 +169,13 @@ public class Engine {
     private int getGauge() {
         int gauge = -1;
         printer.printMsgWithoutLn("Please, insert the amount of stitches for "
-                                + "10 cm knitted with your yarn and needles." 
+                                + "10 cm (gauge) given in the instruction." 
                                 + "\n> ");
         try {
             // TODO: handle stitches zero
             gauge = scanner.nextInt();
         } catch (Exception e) {
-            System.err.println("Not valid value for stitch count for gauge");
+            System.err.println("Not valid value for stitch count for gauge.");
             System.err.println(e.getStackTrace());
         }
 
