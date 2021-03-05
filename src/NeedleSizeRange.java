@@ -1,9 +1,11 @@
 import java.util.*;
 import java.util.Map.Entry;
-
 /**
  * NeedleSizeRange is a class used for setting the standard needle size based 
  * on yarn thickness (yarn type). 
+ * 
+ * @author Terhi Salonen
+ * @version 1.0
  */
 public class NeedleSizeRange {
     
