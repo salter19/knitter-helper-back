@@ -2,6 +2,9 @@ import java.util.*;
 import java.util.Map.Entry;
 /**
  * BaseYarn is an abstract superclass for yarn.
+ * 
+ * @author Terhi Salonen
+ * @version 1.0
  */
 public abstract class BaseYarn {
     /**
