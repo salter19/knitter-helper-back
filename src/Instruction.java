@@ -1,5 +1,8 @@
 /**
  * Instruction holds the instructional values of the knit piece.
+ * 
+ * @author Terhi Salonen
+ * @version 1.0
  */
 public class Instruction {
 
