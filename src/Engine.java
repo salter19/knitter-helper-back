@@ -115,11 +115,44 @@ public class Engine {
 
         if (weight > 0 && meterage > 0) {
             userYarn = new CustomYarn(weight, meterage);
-            printer.printMsg("" + userYarn.getYarnType());
+            printer.printMsg("Your yarn is " + userYarn.getYarnType());
         } else {
             return null;
         }
         return userYarn;
+    }
+
+    /**
+     * returns CustomYarn object, if weight and meterage are acceptable.
+     * Else returns null
+     * @return  CustomYarn  Either CustomYarn based on weight and meterage
+     *                      or null object.
+     */
+    private Instruction getInstruction(CustomYarn userYarn) {
+        int gauge;
+        getGauge();
+        return null;
+    }
+
+
+    /**
+     * returns gauge for 10 cm or -1, if cannot compute.
+     * @return int  The amount of stitches / 10 cm or -1, if cannot compute.
+     */
+    private int getGauge() {
+        int gauge = -1;
+        printer.printMsgWithoutLn("Please, insert the amount of stitches for "
+                                + "10 cm knitted with your yarn and needles." 
+                                + "\n> ");
+        try {
+            // TODO: handle stitches zero
+            gauge = scanner.nextInt();
+        } catch (Exception e) {
+            System.err.println("Not valid value for stitch count for gauge");
+            System.err.println(e.getStackTrace());
+        }
+
+        return gauge;
     }
 
 
