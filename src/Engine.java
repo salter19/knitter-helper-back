@@ -74,17 +74,45 @@ public class Engine {
         if (isOn) {
 
             CustomYarn userYarn = getUserYarn();
-            Instruction instruction =  getInstruction();
 
             if (input.equals(this.options.get(1))) {
+                Instruction instruction =  getInstruction();
                 CustomCount(userYarn, instruction);
             }
             if (input.equals(this.options.get(2))) {
-                printer.printMsg("invoke width counter");
+                widthCounter(userYarn);  
             }
             if (input.equals(this.options.get(3))) {
                 printer.printMsg("invoke yarn type getter");
             }
+        }
+    }
+
+
+    /**
+     * counts the width achieved with given yarn and stitch count.
+     * @param userYarn  CustomYarn  The yarn used for the knit piece.
+     */
+    private void widthCounter(CustomYarn userYarn) {
+        printer.printMsg("Width Counter");
+        int gaugeWidth = 10;
+        int stitchCount = -1;
+        Customizeable countWidth = (a, b) -> a / b * gaugeWidth;
+
+        printer.printMsgWithoutLn("Please, insert stitch count you need"
+                                + " to convert to cm:\n> ");
+        try {
+            stitchCount = scanner.nextInt();
+        } catch (Exception e) {
+            System.err.println("Invalid value for stitch count.");
+            System.err.println(e.getStackTrace());
+        }
+        if (stitchCount > 0) {
+
+            int width = (int) countWidth.getCustomValue(stitchCount, userYarn.getGauge()[0]);
+
+            printer.printMsg("The width with your yarn and given stitch"
+                            + " count is approx.: " + width + " cm.");
         }
     }
 
