@@ -1,6 +1,9 @@
 /**
  * InstructionalYarn is used as the yarn given in the knitting instruction. It
  * is inherited from BaseYarn.
+ * 
+ * @author Terhi Salonen
+ * @version 1.0
  */
 public class InstructionalYarn extends BaseYarn {
 
