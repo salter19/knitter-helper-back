@@ -91,17 +91,54 @@ public class Engine {
 
         printer.printMsg("Custom Stitch Counter");
 
-        weight = this.getWeightFromUser();
-        
+        CustomYarn userYarn = getUserYarn();
 
+        if (userYarn != null) {
+
+        }
+        
+    }
+
+    /**
+     * returns CustomYarn object, if weight and meterage are acceptable.
+     * Else returns null
+     * @return  CustomYarn  Either CustomYarn based on weight and meterage
+     *                      or null object.
+     */
+    private CustomYarn getUserYarn() {
+        int weight;
+        int meterage;
+        CustomYarn userYarn;
+
+        weight = this.getWeightFromUser();
+        meterage = this.getMeterageFromUser();
+
+        if (weight > 0 && meterage > 0) {
+            userYarn = new CustomYarn(weight, meterage);
+            printer.printMsg("" + userYarn.getYarnType());
+        } else {
+            return null;
+        }
+        return userYarn;
+    }
+
+
+    /**
+     * returns the initial meterage of the user's ball of yarn.
+     * @return  int The meterage, returns -1, if not valid.
+     */
+    private int getMeterageFromUser() {
+        int meterage = -1;
         printer.printMsgWithoutLn("Please insert the initial meterage of your yarn (meters):\n> ");
+
         try {
+            // TODO: handle meterage zero
             meterage = scanner.nextInt();
         } catch (Exception e) {
             System.err.println("Not valid meterage.");
             System.err.println(e.getMessage());
         }
-        
+        return meterage;
     }
 
 
@@ -112,6 +149,7 @@ public class Engine {
     private int getWeightFromUser() {
         
         printer.printMsgWithoutLn("Please insert the initial weight of your yarn (grams):\n> ");
+
         try {
             // TODO: handle weight zero
             return scanner.nextInt();
