@@ -30,6 +30,14 @@ public class Printer {
     public void printDouble(double value) {
         System.out.println(value);
     }
+
+    /**
+     * outputs given value without line change at the end.
+     * @param msg   String  Message given in String format.
+     */
+    public void printMsgWithoutLn(String msg) {
+        System.out.println(msg);
+    }
 }
 
 // End of File
