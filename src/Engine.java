@@ -58,17 +58,7 @@ public class Engine {
 
             isOn = checkInputForExit(isOn, input); 
 
-            if (isOn) {
-                if (input.equals(this.options.get(1))) {
-                    printer.printMsg("invoke custom stitch counter");
-                }
-                if (input.equals(this.options.get(2))) {
-                    printer.printMsg("invoke width counter");
-                }
-                if (input.equals(this.options.get(3))) {
-                    printer.printMsg("invoke yarn type getter");
-                }
-            }
+            routeNextAction(isOn, input);
             
         }
         scanner.close();
@@ -77,7 +67,27 @@ public class Engine {
 
 
     /**
-     * returns user input for command.
+     * routes next action based on users command.
+     * @param isOn      boolean     If true, routing is taking place.
+     * @param input     String      User input, the command.
+     */
+    private void routeNextAction(boolean isOn, String input) {
+        if (isOn) {
+            if (input.equals(this.options.get(1))) {
+                printer.printMsg("invoke custom stitch counter");
+            }
+            if (input.equals(this.options.get(2))) {
+                printer.printMsg("invoke width counter");
+            }
+            if (input.equals(this.options.get(3))) {
+                printer.printMsg("invoke yarn type getter");
+            }
+        }
+    }
+
+
+    /**
+     * returns users command input.
      * @return  String  User input.
      */
     private String getCommand() {
