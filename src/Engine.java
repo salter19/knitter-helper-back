@@ -48,15 +48,14 @@ public class Engine {
         boolean isOn = true;
         String input = "";
 
-        printer.printMsg("Hello!\nThis is Stitch Counter 1.0\n");
-        printer.printMsg(this.CHOICES_MSG);
+        printer.printMsg("Hello!\nThis is Stitch Counter 1.0");
 
         while (isOn) {
             input = getCommand();
 
             checkInputForNonCommand(input);
 
-            isOn = checkInputForExit(isOn, input); 
+            isOn = checkInputForExitCommand(isOn, input); 
 
             routeNextAction(isOn, input);
             
@@ -74,7 +73,7 @@ public class Engine {
     private void routeNextAction(boolean isOn, String input) {
         if (isOn) {
             if (input.equals(this.options.get(1))) {
-                printer.printMsg("invoke custom stitch counter");
+                getCustomCount();
             }
             if (input.equals(this.options.get(2))) {
                 printer.printMsg("invoke width counter");
@@ -86,14 +85,53 @@ public class Engine {
     }
 
 
+    private void getCustomCount() {
+        int weight = 0;
+        int meterage = 0;
+
+        printer.printMsg("Custom Stitch Counter");
+
+        weight = this.getWeightFromUser();
+        
+
+        printer.printMsgWithoutLn("Please insert the initial meterage of your yarn (meters):\n> ");
+        try {
+            meterage = scanner.nextInt();
+        } catch (Exception e) {
+            System.err.println("Not valid meterage.");
+            System.err.println(e.getMessage());
+        }
+        
+    }
+
+
+    /**
+     * gets the initial weight of users ball of yarn.
+     * @return  int The weight, returns -1, if not valid. 
+     */
+    private int getWeightFromUser() {
+        
+        printer.printMsgWithoutLn("Please insert the initial weight of your yarn (grams):\n> ");
+        try {
+            // TODO: handle weight zero
+            return scanner.nextInt();
+        } catch (Exception e) {
+            System.err.println("Not valid weight.");
+            System.err.println(e.getMessage());
+        }
+        return -1;
+    }
+
+
     /**
      * returns users command input.
      * @return  String  User input.
      */
     private String getCommand() {
         String input;
-        printer.printMsg("What do you want to do?");
-        printer.printMsgWithoutLn("> ");
+        printer.printMsg("\n" + this.CHOICES_MSG
+        + "\n");
+        printer.printMsgWithoutLn("What do you want to do?\n> ");
         input = scanner.nextLine();
         return input;
     }
@@ -108,7 +146,7 @@ public class Engine {
         if (!this.options.contains(input) 
             && !input.equals(this.options.get(0).toUpperCase())) {
 
-            printer.printMsg("Invalid command, cannot compute.");
+            printer.printMsg("Invalid command, " + input + " cannot compute.");
             return;
         }
     }
@@ -121,7 +159,7 @@ public class Engine {
      * @param input     String      User input.
      * @return          boolean     State of isOn after input valuation.
      */
-    private boolean checkInputForExit(boolean isOn, String input) {
+    private boolean checkInputForExitCommand(boolean isOn, String input) {
         if ( input.equalsIgnoreCase(this.options.get(0)) ) {
             printer.printMsg("closing with command...");
             isOn = false;
