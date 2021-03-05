@@ -52,14 +52,24 @@ public class Engine {
         printer.printMsg(this.CHOICES_MSG);
 
         while (isOn) {
-            printer.printMsg("What do you want to do?");
-            printer.printMsgWithoutLn("> ");
+            input = getCommand();
 
-            input = scanner.nextLine();
+            checkInputForNonCommand(input);
 
             isOn = checkInputForExit(isOn, input); 
+
+            if (isOn) {
+                if (input.equals(this.options.get(1))) {
+                    printer.printMsg("invoke custom stitch counter");
+                }
+                if (input.equals(this.options.get(2))) {
+                    printer.printMsg("invoke width counter");
+                }
+                if (input.equals(this.options.get(3))) {
+                    printer.printMsg("invoke yarn type getter");
+                }
+            }
             
-            checkInputForNonCommand(input);
         }
         scanner.close();
         System.exit(0);
@@ -67,8 +77,21 @@ public class Engine {
 
 
     /**
+     * returns user input for command.
+     * @return  String  User input.
+     */
+    private String getCommand() {
+        String input;
+        printer.printMsg("What do you want to do?");
+        printer.printMsgWithoutLn("> ");
+        input = scanner.nextLine();
+        return input;
+    }
+
+
+    /**
      * checks whether the user has given a valid command. If so, outputs a
-     * message informing the user.
+     * message informing the user and returns.
      * @param input String  User input to be evaluated.
      */
     private void checkInputForNonCommand(String input) {
