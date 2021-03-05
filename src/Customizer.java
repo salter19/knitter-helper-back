@@ -1,6 +1,9 @@
 /**
  * Customizer is used to customize the knitting instruction to fit the custom
  * yarn instead of the yarn used in the instruction. 
+ * 
+ * @author Terhi Salonen
+ * @version 1.0
  */
 public class Customizer {
 
