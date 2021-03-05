@@ -57,7 +57,9 @@ public class Engine {
 
             isOn = checkInputForExitCommand(isOn, input); 
 
-            routeNextAction(isOn, input);
+            if (isOn) {
+                routeNextAction(input);
+            }
             
         }
         scanner.close();
@@ -67,25 +69,27 @@ public class Engine {
 
     /**
      * routes next action based on users command.
-     * @param isOn      boolean     If true, routing is taking place.
-     * @param input     String      User input, the command.
      */
-    private void routeNextAction(boolean isOn, String input) {
-        if (isOn) {
+    private void routeNextAction(String input) {
 
+        if (input.equals(this.options.get(1))) {
+            printer.printMsg("Set your chosen yarn");
             CustomYarn userYarn = getUserYarn();
 
-            if (input.equals(this.options.get(1))) {
-                Instruction instruction =  getInstruction();
-                CustomCount(userYarn, instruction);
-            }
-            if (input.equals(this.options.get(2))) {
-                widthCounter(userYarn);  
-            }
-            if (input.equals(this.options.get(3))) {
-                printer.printMsg("invoke yarn type getter");
-            }
-        }
+            printer.printMsg("Set the instruction");
+            Instruction instruction =  getInstruction();
+            CustomCount(userYarn, instruction);
+
+        } else if (input.equals(this.options.get(2))) {
+            printer.printMsg("Set your chosen yarn");
+            CustomYarn userYarn = getUserYarn();
+
+            printer.printMsg("Set width counter");
+            widthCounter(userYarn); 
+
+        } else if (input.equals(this.options.get(3))) {
+            printer.printMsg("invoke yarn type getter");
+        } 
     }
 
 
@@ -94,7 +98,7 @@ public class Engine {
      * @param userYarn  CustomYarn  The yarn used for the knit piece.
      */
     private void widthCounter(CustomYarn userYarn) {
-        printer.printMsg("Width Counter");
+        printer.printMsg("\nWidth Counter");
         int gaugeWidth = 10;
         int stitchCount = -1;
         Customizeable countWidth = (a, b) -> a / b * gaugeWidth;
@@ -124,7 +128,7 @@ public class Engine {
      */
     private void CustomCount(CustomYarn userYarn, Instruction instruction) {
 
-        printer.printMsg("Custom Stitch Counter");
+        printer.printMsg("\nCustom Stitch Counter");
 
         if (userYarn != null && instruction != null) {
             Customizer customizer = new Customizer(userYarn, instruction);
@@ -270,16 +274,18 @@ public class Engine {
 
     /**
      * checks whether the user has given a valid command. If so, outputs a
-     * message informing the user and returns.
-     * @param input String  User input to be evaluated.
+     * message informing the user and returns true.
+     * @param   input   String      User input to be evaluated.
+     * @return          boolean     Returns true if invalid command is given.
      */
-    private void checkInputForNonCommand(String input) {
+    private boolean checkInputForNonCommand(String input) {
         if (!this.options.contains(input) 
             && !input.equals(this.options.get(0).toUpperCase())) {
 
             printer.printMsg("Invalid command, " + input + " cannot compute.");
-            return;
+            return true;
         }
+        return false;
     }
 
 
