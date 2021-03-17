@@ -210,8 +210,13 @@ public class Engine {
      *                          stitch count or null object.
      */
     private Instruction getInstruction() {
-        int gauge = getGauge();
-        int stitchCount = getTotalStitchCount();
+        try {
+            int gauge = getGauge();
+            int stitchCount = getTotalStitchCount();
+        } catch (ZeroStitchException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
 
         if (gauge > 0 && stitchCount > 0) {
             return new Instruction(gauge, stitchCount);
@@ -241,16 +246,21 @@ public class Engine {
 
     /**
      * returns gauge for 10 cm or -1, if cannot compute.
-     * @return int  The amount of stitches / 10 cm or -1, if cannot compute.
+     * @return  int                 The amount of stitches / 10 cm.
+     * @throws  ZeroStitchException The Exception thrown, if given stitch count 
+     *                              for the instruction is zero or less.
      */
-    private int getGauge() {
+    private int getGauge() throws ZeroStitchException {
         int gauge = -1;
         printer.printMsgWithoutLn("Please, insert the amount of stitches for "
                                 + "10 cm (gauge) given in the instruction." 
                                 + "\n> ");
         try {
-            // TODO: handle stitches zero
             gauge = scanner.nextInt();
+
+            if (gauge <= this.ZERO) {
+                throw new ZeroStitchException("Given gauge is zero. No gauge can be counted from that.");
+            }
 
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
