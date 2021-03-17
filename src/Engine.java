@@ -26,6 +26,9 @@ public class Engine {
     /** attribute for zero value */
     private final int ZERO = 0;
 
+    /** default value null for undefined objects */
+    private final Object UNDEFINED_OBJECT = null;
+
     /**
      * is constructor.
      */
@@ -185,20 +188,15 @@ public class Engine {
     private CustomYarn getUserYarn() {
         int weight;
         int meterage;
-        CustomYarn userYarn;
+        CustomYarn userYarn = (CustomYarn) this.UNDEFINED_OBJECT;
 
         try {
             weight = this.getWeightFromUser();
             meterage = this.getMeterageFromUser();
+            userYarn = new CustomYarn(weight, meterage);
         } catch (ZeroStitchException e) {
             e.printStackTrace();
             System.exit(1);
-        }
-
-        if (weight > 0 && meterage > 0) {
-            userYarn = new CustomYarn(weight, meterage);
-        } else {
-            return null;
         }
         return userYarn;
     }
