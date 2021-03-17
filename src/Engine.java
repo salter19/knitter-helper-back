@@ -134,8 +134,11 @@ public class Engine {
      * no approximated gauge.
      * @param userYarn              CustomYarn  The yarn used in the knitpiece.
      * @throws YarnTypeException    YarnTypeException  
+     * @throws ZeroStitchException
      */
-    private void widthCounter(CustomYarn userYarn) throws YarnTypeException {
+    private void widthCounter(CustomYarn userYarn) 
+        throws YarnTypeException, ZeroStitchException {
+            
         printer.printMsg("\nWidth Counter");
         int gaugeWidth = 10;
         int stitchCount = -1;
@@ -152,7 +155,8 @@ public class Engine {
             System.exit(1);
         }
 
-        if (stitchCount > 0 && userYarn.getYarnType() != YarnType.LACE ) {
+        if (stitchCount > this.ZERO 
+            && userYarn.getYarnType() != YarnType.LACE ) {
 
             int width = (int) countWidth.getCustomValue(stitchCount, userYarn.getGauge()[0]);
 
@@ -162,6 +166,9 @@ public class Engine {
         } else if (userYarn.getYarnType() == YarnType.LACE) {
 
             throw new YarnTypeException("Lace weight yarn has no gauge approximation. No width can be counted.");
+
+        } else {
+            throw new ZeroStitchException("Stitch count given was zero. No width can be counted.");
         }
     }
 
