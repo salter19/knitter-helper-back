@@ -23,6 +23,9 @@ public class Engine {
     private final String[] options_arr = { "x", "1", "2", "3" };
     private final List<String> options = new ArrayList<String>();
 
+    /** attribute for zero value */
+    private final int ZERO = 0;
+
     /**
      * is constructor.
      */
@@ -184,8 +187,13 @@ public class Engine {
         int meterage;
         CustomYarn userYarn;
 
-        weight = this.getWeightFromUser();
-        meterage = this.getMeterageFromUser();
+        try {
+            weight = this.getWeightFromUser();
+            meterage = this.getMeterageFromUser();
+        } catch (ZeroStitchException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
 
         if (weight > 0 && meterage > 0) {
             userYarn = new CustomYarn(weight, meterage);
@@ -274,16 +282,22 @@ public class Engine {
 
     /**
      * gets the initial weight of users ball of yarn.
-     * @return  int The weight, returns -1, if not valid. 
+     * @throws  
+     * @return  int                 The weight, returns -1, if not valid. 
+     * @throws  ZeroStitchException The exception thrown, if weight given is 
+     *                              zero or less.
      */
-    private int getWeightFromUser() {
+    private int getWeightFromUser() throws ZeroStitchException {
         
         printer.printMsgWithoutLn("Please insert the initial weight of your yarn (grams):\n> ");
         int res = -1;
 
         try {
-            // TODO: handle weight zero
             res = scanner.nextInt();
+
+            if (res <= this.ZERO) {
+                throw new ZeroStitchException("Given weight is zero, no stitch can be counted from that");
+            }
 
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
