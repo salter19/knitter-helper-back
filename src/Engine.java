@@ -194,6 +194,7 @@ public class Engine {
             weight = this.getWeightFromUser();
             meterage = this.getMeterageFromUser();
             userYarn = new CustomYarn(weight, meterage);
+
         } catch (ZeroStitchException e) {
             e.printStackTrace();
             System.exit(1);
@@ -208,18 +209,21 @@ public class Engine {
      *                          stitch count or null object.
      */
     private Instruction getInstruction() {
+        int gauge = this.ZERO;
+        int stitchCount = this.ZERO;
+        
         try {
-            int gauge = getGauge();
-            int stitchCount = getTotalStitchCount();
+            gauge = getGauge();
+            stitchCount = getTotalStitchCount();
+
+            return new Instruction(gauge, stitchCount);
+
         } catch (ZeroStitchException e) {
             e.printStackTrace();
             System.exit(1);
         }
 
-        if (gauge > 0 && stitchCount > 0) {
-            return new Instruction(gauge, stitchCount);
-        } 
-        return null;
+        return (Instruction) this.UNDEFINED_OBJECT;
     }
 
     /**
