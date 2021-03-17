@@ -226,16 +226,21 @@ public class Engine {
 
     /**
      * returns total stitch count of the instruction.
-     * @return  int     The total stitch count, or if cannot be computed, -1.
+     * @return  int                 The total stitch count.
+     * @throws  ZeroStitchException The exception thrown, if given stitch count
+     *                              for the instruction is zero or less.
      */
-    private int getTotalStitchCount() {
+    private int getTotalStitchCount() throws ZeroStitchException {
         int count = -1;
         printer.printMsgWithoutLn("Please, insert the amount of stitches in " 
                                 + "the instruction in total:\n> ");
 
         try {
-            // TODO: handle total stitch count zero
             count = scanner.nextInt();
+
+            if (count <= this.ZERO) {
+                throw new ZeroStitchException("Given instructional stitch count was zero. Cannot count custom stitch count.");
+            }
 
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
