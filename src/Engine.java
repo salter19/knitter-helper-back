@@ -91,8 +91,8 @@ public class Engine {
 
             try {
                 widthCounter(userYarn);
+
             } catch (YarnTypeException e) {
-                e.getMessage();
                 e.printStackTrace();
                 System.exit(1);
             } 
@@ -120,7 +120,7 @@ public class Engine {
      * YarnTypeException if user yarn is lace type, as lace type yarn has
      * no approximated gauge.
      * @param userYarn              CustomYarn  The yarn used in the knitpiece.
-     * @throws YarnTypeException    Exception   
+     * @throws YarnTypeException    YarnTypeException  
      */
     private void widthCounter(CustomYarn userYarn) throws YarnTypeException {
         printer.printMsg("\nWidth Counter");
@@ -136,15 +136,18 @@ public class Engine {
 
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
+            System.exit(1);
         }
 
         if (stitchCount > 0 && userYarn.getYarnType() != YarnType.LACE ) {
+
             int width = (int) countWidth.getCustomValue(stitchCount, userYarn.getGauge()[0]);
 
             printer.printMsg("The width with your yarn and given stitch"
                             + " count is approx.: " + width + " cm.");
 
         } else if (userYarn.getYarnType() == YarnType.LACE) {
+
             throw new YarnTypeException("Lace weight yarn has no gauge approximation. No width can be counted.");
         }
     }
@@ -204,7 +207,7 @@ public class Engine {
 
         if (gauge > 0 && stitchCount > 0) {
             return new Instruction(gauge, stitchCount);
-        }
+        } 
         return null;
     }
 
@@ -220,9 +223,10 @@ public class Engine {
         try {
             // TODO: handle total stitch count zero
             count = scanner.nextInt();
-        } catch (Exception e) {
-            System.err.println("Not valid value for total stitch count");
-            System.err.println(e.getStackTrace());
+
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            System.exit(1);
         }
         return count; 
     }
@@ -239,9 +243,10 @@ public class Engine {
         try {
             // TODO: handle stitches zero
             gauge = scanner.nextInt();
-        } catch (Exception e) {
-            System.err.println("Not valid value for stitch count for gauge.");
-            System.err.println(e.getStackTrace());
+
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            System.exit(1);
         }
 
         return gauge;
@@ -259,9 +264,9 @@ public class Engine {
         try {
             // TODO: handle meterage zero
             meterage = scanner.nextInt();
-        } catch (Exception e) {
-            System.err.println("Not valid meterage.");
-            System.err.println(e.getMessage());
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            System.exit(1);
         }
         return meterage;
     }
@@ -274,15 +279,17 @@ public class Engine {
     private int getWeightFromUser() {
         
         printer.printMsgWithoutLn("Please insert the initial weight of your yarn (grams):\n> ");
+        int res = -1;
 
         try {
             // TODO: handle weight zero
-            return scanner.nextInt();
-        } catch (Exception e) {
-            System.err.println("Not valid weight.");
-            System.err.println(e.getMessage());
+            res = scanner.nextInt();
+
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            System.exit(1);
         }
-        return -1;
+        return res;
     }
 
 
