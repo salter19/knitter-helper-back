@@ -88,7 +88,14 @@ public class Engine {
             CustomYarn userYarn = userYarnSetter();
 
             printer.printMsg("Set the width counter");
-            widthCounter(userYarn); 
+
+            try {
+                widthCounter(userYarn);
+            } catch (YarnTypeException e) {
+                e.getMessage();
+                e.printStackTrace();
+                System.exit(1);
+            } 
 
         } else if (input.equals(this.options.get(3))) {
             CustomYarn userYarn = userYarnSetter();
@@ -109,10 +116,13 @@ public class Engine {
     }
 
     /**
-     * counts the width achieved with given yarn and stitch count.
-     * @param userYarn  CustomYarn  The yarn used for the knit piece.
+     * counts the width achieved with given yarn and stitch count. Throws
+     * YarnTypeException if user yarn is lace type, as lace type yarn has
+     * no approximated gauge.
+     * @param userYarn              CustomYarn  The yarn used in the knitpiece.
+     * @throws YarnTypeException    Exception   
      */
-    private void widthCounter(CustomYarn userYarn) {
+    private void widthCounter(CustomYarn userYarn) throws YarnTypeException {
         printer.printMsg("\nWidth Counter");
         int gaugeWidth = 10;
         int stitchCount = -1;
@@ -120,18 +130,21 @@ public class Engine {
 
         printer.printMsgWithoutLn("Please, insert stitch count you need"
                                 + " to convert to cm:\n> ");
+                                
         try {
             stitchCount = scanner.nextInt();
         } catch (Exception e) {
             System.err.println("Invalid value for stitch count.");
             System.err.println(e.getStackTrace());
         }
-        if (stitchCount > 0) {
 
+        if (stitchCount > 0 && userYarn.getYarnType() != YarnType.LACE ) {
             int width = (int) countWidth.getCustomValue(stitchCount, userYarn.getGauge()[0]);
 
             printer.printMsg("The width with your yarn and given stitch"
                             + " count is approx.: " + width + " cm.");
+        } else if (userYarn.getYarnType() == YarnType.LACE) {
+            throw new YarnTypeException("Lace weight yarn has no gauge approximation. No width can be counted.");
         }
     }
 
