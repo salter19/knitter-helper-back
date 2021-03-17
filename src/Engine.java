@@ -108,7 +108,10 @@ public class Engine {
             } catch (YarnTypeException e) {
                 e.printStackTrace();
                 System.exit(1);
-            } 
+            } catch (ZeroStitchException e) {
+                e.printStackTrace();
+                System.exit(1);
+            }
 
         } else if (input.equals(this.options.get(3))) {
             CustomYarn userYarn = userYarnSetter();
@@ -133,12 +136,14 @@ public class Engine {
      * YarnTypeException if user yarn is lace type, as lace type yarn has
      * no approximated gauge.
      * @param userYarn              CustomYarn  The yarn used in the knitpiece.
-     * @throws YarnTypeException    YarnTypeException  
-     * @throws ZeroStitchException
+     * @throws YarnTypeException    Exception thrown, if given yarn is lace
+     *                              type.
+     * @throws ZeroStitchException  Exception thrown, if given stitch count is
+     *                              zero.
      */
     private void widthCounter(CustomYarn userYarn) 
         throws YarnTypeException, ZeroStitchException {
-            
+
         printer.printMsg("\nWidth Counter");
         int gaugeWidth = 10;
         int stitchCount = -1;
