@@ -24,3 +24,5 @@ class YarnTypeException extends Exception {
         return this.detail;
     }
 }
+
+// End of File.
