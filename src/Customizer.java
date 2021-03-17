@@ -23,16 +23,30 @@ public class Customizer {
      */
     public Customizer(CustomYarn customYarn, Instruction instruction) {
         
-        // TODO: Handle exception YarnType Lace 
 
-        /** the smallest end of the gauge regarding the yarn to be used. */
-        this.customGauge = customYarn.getGauge()[0];
+        try {
+            if (customYarn.getYarnType() != YarnType.LACE) {
+                /** 
+                 * the smallest end of the gauge regarding the yarn to 
+                 * be used. 
+                 */
+                this.customGauge = customYarn.getGauge()[0];
 
-        /** the width to aim at */
-        this.widthInCm = instruction.getWidthInCm();
+                /** the width to aim at */
+                this.widthInCm = instruction.getWidthInCm();
 
-        /** set the custom stitch count */
-        setCustomStitchCount();
+                /** set the custom stitch count */
+                setCustomStitchCount();
+
+            } else {
+                throw new ZeroStitchException("Lace type yarn has no approximated values. Cannot custom.");
+            }
+            
+
+        } catch (ZeroStitchException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
     }
 
     /**
