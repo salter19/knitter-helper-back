@@ -14,4 +14,13 @@ class YarnTypeException extends Exception {
     public YarnTypeException(String message) {
         this.detail = message;
     }
+
+    /**
+     * is used when exception has been caught
+     * @return String   this.detail as a exception message
+     */
+    @Override
+    public String getMessage() {
+        return this.detail;
+    }
 }
