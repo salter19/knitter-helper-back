@@ -130,12 +130,12 @@ public class Engine {
 
         printer.printMsgWithoutLn("Please, insert stitch count you need"
                                 + " to convert to cm:\n> ");
-                                
+
         try {
             stitchCount = scanner.nextInt();
-        } catch (Exception e) {
-            System.err.println("Invalid value for stitch count.");
-            System.err.println(e.getStackTrace());
+
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
         }
 
         if (stitchCount > 0 && userYarn.getYarnType() != YarnType.LACE ) {
@@ -143,6 +143,7 @@ public class Engine {
 
             printer.printMsg("The width with your yarn and given stitch"
                             + " count is approx.: " + width + " cm.");
+
         } else if (userYarn.getYarnType() == YarnType.LACE) {
             throw new YarnTypeException("Lace weight yarn has no gauge approximation. No width can be counted.");
         }
