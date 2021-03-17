@@ -173,7 +173,7 @@ public class Engine {
             throw new YarnTypeException("Lace weight yarn has no gauge approximation. No width can be counted.");
 
         } else {
-            throw new ZeroStitchException("Stitch count given was zero. No width can be counted.");
+            throw new ZeroStitchException("Stitch count given was zero or less. No width can be counted.");
         }
     }
 
@@ -265,7 +265,7 @@ public class Engine {
             count = scanner.nextInt();
 
             if (count <= this.ZERO) {
-                throw new ZeroStitchException("Given instructional stitch count was zero. Cannot count custom stitch count.");
+                throw new ZeroStitchException("Given instructional stitch count was zero or less. Cannot count custom stitch count.");
             }
 
         } catch (IllegalArgumentException e) {
@@ -290,7 +290,7 @@ public class Engine {
             gauge = scanner.nextInt();
 
             if (gauge <= this.ZERO) {
-                throw new ZeroStitchException("Given gauge is zero. No gauge can be counted from that.");
+                throw new ZeroStitchException("Given gauge is zero or less. No gauge can be counted from that.");
             }
 
         } catch (IllegalArgumentException e) {
@@ -316,7 +316,7 @@ public class Engine {
             meterage = scanner.nextInt();
             
             if (meterage <= this.ZERO) {
-                throw new ZeroStitchException("Given meterage is zero. No stitches can be counted from that.");
+                throw new ZeroStitchException("Given meterage is zero or less. No stitches can be counted from that.");
             }
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
@@ -342,7 +342,7 @@ public class Engine {
             res = scanner.nextInt();
 
             if (res <= this.ZERO) {
-                throw new ZeroStitchException("Given weight is zero, no stitch can be counted from that");
+                throw new ZeroStitchException("Given weight is zero or less, no stitch can be counted from that");
             }
 
         } catch (IllegalArgumentException e) {
