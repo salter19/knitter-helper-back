@@ -87,7 +87,14 @@ public class Engine {
 
             printer.printMsg("Set the instruction");
             Instruction instruction =  getInstruction();
-            CustomCount(userYarn, instruction);
+
+            try {
+                CustomCount(userYarn, instruction);
+
+            } catch (ZeroStitchException e) {
+                e.printStackTrace();
+                System.exit(1);
+            }
             
 
         } else if (input.equals(this.options.get(2))) {
@@ -160,11 +167,14 @@ public class Engine {
 
     /**
      * is action option to output the custom stitch count for knit piece.
-     * @param userYarn      CustomYarn      The yarn of the user.
-     * @param instruction   Instruction     The instruction to be customized to
-     *                                      fit user's yarn.
+     * @param   userYarn            CustomYarn      The yarn of the user.
+     * @param   instruction         Instruction     The instruction to be
+     *                                              customized to fit user's
+     *                                              yarn.
+     * @throws ZeroStitchException  The exception thrown, if null value 
+     *                              object is given.
      */
-    private void CustomCount(CustomYarn userYarn, Instruction instruction) {
+    private void CustomCount(CustomYarn userYarn, Instruction instruction) throws ZeroStitchException {
 
         printer.printMsg("\nCustom Stitch Counter");
 
@@ -175,6 +185,9 @@ public class Engine {
             printer.printMsg("The stitch count for your yarn is " 
                                 + customCount 
                                 + "\n(The stitch count in the instruction was " + instruction.getStitchCount() + ")");
+        
+        } else {
+            throw new ZeroStitchException("There was null value object given. No stitch count could be counted.");
         }
         
     }
@@ -188,18 +201,17 @@ public class Engine {
     private CustomYarn getUserYarn() {
         int weight;
         int meterage;
-        CustomYarn userYarn = (CustomYarn) this.UNDEFINED_OBJECT;
 
         try {
             weight = this.getWeightFromUser();
             meterage = this.getMeterageFromUser();
-            userYarn = new CustomYarn(weight, meterage);
+            return new CustomYarn(weight, meterage);
 
         } catch (ZeroStitchException e) {
             e.printStackTrace();
             System.exit(1);
         }
-        return userYarn;
+        return (CustomYarn) this.UNDEFINED_OBJECT;
     }
 
     /**
