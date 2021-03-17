@@ -263,15 +263,20 @@ public class Engine {
 
     /**
      * returns the initial meterage of the user's ball of yarn.
-     * @return  int The meterage, returns -1, if not valid.
+     * @return  int                 The meterage.
+     * @throws  ZeroStitchException The exception thrown, if given meterage is
+     *                              zero or less.
      */
-    private int getMeterageFromUser() {
+    private int getMeterageFromUser() throws ZeroStitchException {
         int meterage = -1;
         printer.printMsgWithoutLn("Please insert the initial meterage of your yarn (meters):\n> ");
 
         try {
-            // TODO: handle meterage zero
             meterage = scanner.nextInt();
+            
+            if (meterage <= this.ZERO) {
+                throw new ZeroStitchException("Given meterage is zero. No stitches can be counted from that.");
+            }
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
             System.exit(1);
@@ -283,7 +288,7 @@ public class Engine {
     /**
      * gets the initial weight of users ball of yarn.
      * @throws  
-     * @return  int                 The weight, returns -1, if not valid. 
+     * @return  int                 The weight. 
      * @throws  ZeroStitchException The exception thrown, if weight given is 
      *                              zero or less.
      */
