@@ -41,7 +41,6 @@ public class Customizer {
             } else {
                 throw new ZeroStitchException("Lace type yarn has no approximated values. Cannot custom.");
             }
-            
 
         } catch (ZeroStitchException e) {
             e.printStackTrace();
