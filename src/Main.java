@@ -16,7 +16,12 @@ public class Main {
     public static void main(String[] args) {
 
         Engine engine = new Engine();
-        engine.run();
+        try {
+            engine.run();
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            e.printStackTrace();
+        }
     }
 }
 
