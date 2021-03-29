@@ -7,10 +7,11 @@ import java.util.Map.Entry;
  * @author Terhi Salonen
  * @version 1.0
  */
-public class NeedleSizeRange {
+public class NeedleSizeRange extends YarnTypeRangedItem {
     
     /** are needle size (mm) ranges for different yarn types. */
     // private final int[] RANGE_LACE = { 600, 9999 };
+    
     private final double[] RANGE_FINGERING = { 1, 2 };
     private final double[] RANGE_SOCK = { 2.25, 3.25 };
     private final double[] RANGE_SPORT = { 3.5, 3.75 };
@@ -18,7 +19,6 @@ public class NeedleSizeRange {
     private final double[] RANGE_ARAN = { 4.5, 5.5 };
     private final double[] RANGE_CHUNKY = { 6, 8 };
     private final double[] RANGE_SUPER_CHUNKY = { 9, 13 };
-
     private final double[] UNDEFINED_RANGE = {}; 
     
     /**
@@ -32,6 +32,9 @@ public class NeedleSizeRange {
      * is the constructor.
      */
     public NeedleSizeRange() {
+
+        final double[][] RANGES = { RANGE_FINGERING, RANGE_SOCK, RANGE_SPORT, RANGE_DK, RANGE_ARAN, RANGE_CHUNKY, RANGE_SUPER_CHUNKY };
+        setRanges(RANGES);
         setRangesNeedleSize();
     }
 
