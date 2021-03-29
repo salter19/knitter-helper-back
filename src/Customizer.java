@@ -45,6 +45,14 @@ public class Customizer {
         } catch (ZeroStitchException e) {
             e.printStackTrace();
             System.exit(1);
+        } catch (IndexOutOfBoundsException e) {
+          System.err.println("Could not find such yarn type.");
+          e.printStackTrace();
+          System.exit(1);
+        } catch (Exception e) {
+          System.err.println("Something went wrong with customizer.");
+          e.printStackTrace();
+          System.exit(1);
         }
     }
 
