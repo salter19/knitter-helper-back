@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.Map.Entry;
 
 class YarnTypeRangedItem {
 
@@ -14,7 +15,7 @@ class YarnTypeRangedItem {
      * sets elements into HashMap<YarnType, double[]> ranges.
      * 
      */
-    private void setRanges(double[][] range) {
+    void setRanges(double[][] range) {
         ranges.put(YarnType.LACE, this.UNDEFINED_RANGE);
         ranges.put(YarnType.FINGERING, range[0]);
         ranges.put(YarnType.SOCK, range[1]);
@@ -23,6 +24,28 @@ class YarnTypeRangedItem {
         ranges.put(YarnType.ARAN, range[4]);
         ranges.put(YarnType.CHUNKY, range[5]);
         ranges.put(YarnType.SUPER_CHUNKY, range[6]);
+    }
+
+    /**
+     * returns the standard needle size range of given YarnType.
+     * @param   yarnType  YarnType given.
+     * @return  double[]
+     */
+    public double[] getRange(YarnType yarnType) {
+        Iterator<Entry<YarnType, double[]>> iterator = 
+            this.ranges.entrySet().iterator();
+
+        while(iterator.hasNext()) {
+            Map.Entry<YarnType, double[]> mapElement = 
+                (Map.Entry<YarnType, double[]>)iterator.next();
+        
+            YarnType yarn = (YarnType)mapElement.getKey();
+
+            if (yarnType == yarn) {
+                return (double[]) mapElement.getValue();
+            } 
+        }
+        return this.UNDEFINED_RANGE;
     }
   
 }
