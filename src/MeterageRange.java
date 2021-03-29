@@ -10,23 +10,23 @@ import java.util.Map.Entry;
 public class MeterageRange {
     
     /** are meterage ranges for different yarn types. */
-    private final int[] RANGE_LACE = { 600, 9999 };
-    private final int[] RANGE_FINGERING = { 500, 599 };
-    private final int[] RANGE_SOCK = { 350, 499 };
-    private final int[] RANGE_SPORT = { 250, 349 };
-    private final int[] RANGE_DK = { 200, 249 };
-    private final int[] RANGE_ARAN = { 120, 199 };
-    private final int[] RANGE_CHUNKY = { 100, 119 };
-    private final int[] RANGE_SUPER_CHUNKY = { 60, 99 };
+    private final double[] RANGE_LACE = { 600, 9999 };
+    private final double[] RANGE_FINGERING = { 500, 599 };
+    private final double[] RANGE_SOCK = { 350, 499 };
+    private final double[] RANGE_SPORT = { 250, 349 };
+    private final double[] RANGE_DK = { 200, 249 };
+    private final double[] RANGE_ARAN = { 120, 199 };
+    private final double[] RANGE_CHUNKY = { 100, 119 };
+    private final double[] RANGE_SUPER_CHUNKY = { 60, 99 };
 
-    private final int[] UNDEFINED_RANGE = {};
+    private final double[] UNDEFINED_RANGE = {};
 
     /**
      * is the collection that holds YarnTypes and matching ranges of meterage
      * as a key - value pair.
      */
-    private HashMap<YarnType, int[]> rangesMeterage = 
-        new HashMap<YarnType, int[]>();
+    private HashMap<YarnType, double[]> rangesMeterage = 
+        new HashMap<YarnType, double[]>();
 
     /**
      * is the constructor.
@@ -38,22 +38,22 @@ public class MeterageRange {
     }
 
     /**
-     * returns the meterage range of given YarnType. Prescision in meters.
+     * returns the meterage range of given YarnType.
      * @param   yarnType  YarnType given.
-     * @return  int[]
+     * @return  double[]
      */
-    public int[] getRange(YarnType yarnType) {
-        Iterator<Entry<YarnType, int[]>> iterator = 
+    public double[] getRange(YarnType yarnType) {
+        Iterator<Entry<YarnType, double[]>> iterator = 
             this.rangesMeterage.entrySet().iterator();
 
         while(iterator.hasNext()) {
-            Map.Entry<YarnType, int[]> mapElement = 
-                (Map.Entry<YarnType, int[]>)iterator.next();
+            Map.Entry<YarnType, double[]> mapElement = 
+                (Map.Entry<YarnType, double[]>)iterator.next();
         
             YarnType yarn = (YarnType)mapElement.getKey();
 
             if (yarnType == yarn) {
-                return (int[]) mapElement.getValue();
+                return (double[]) mapElement.getValue();
             }
             
         }
@@ -70,15 +70,15 @@ public class MeterageRange {
      * @param meterage  int given meterage to be compared.
      * @return          YarnType
      */
-    public YarnType getYarnType(int meterage) {
-        Iterator<Entry<YarnType, int[]>> iterator = 
+    public YarnType getYarnType(double meterage) {
+        Iterator<Entry<YarnType, double[]>> iterator = 
             this.rangesMeterage.entrySet().iterator();
 
         while(iterator.hasNext()) {
-            Map.Entry<YarnType, int[]> mapElement = 
-                (Map.Entry<YarnType, int[]>)iterator.next();
+            Map.Entry<YarnType, double[]> mapElement = 
+                (Map.Entry<YarnType, double[]>)iterator.next();
         
-            int[] range =  (int[])mapElement.getValue();
+            double[] range =  (double[])mapElement.getValue();
 
             if (meterage >= range[0] && meterage <= range[1]) {
                 return (YarnType) mapElement.getKey();
@@ -88,7 +88,7 @@ public class MeterageRange {
     }
 
     /**
-     * sets elements into HashMap<YarnType, int[]> rangesMeterage.
+     * sets elements into HashMap<YarnType, double[]> rangesMeterage.
      */
     private void setRangesMetrage() {
         rangesMeterage.put(YarnType.LACE, this.RANGE_LACE);
