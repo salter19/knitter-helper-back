@@ -79,3 +79,5 @@ class RangedItem {
     }
   
 }
+
+// End of file.
