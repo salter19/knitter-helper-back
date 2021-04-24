@@ -62,12 +62,18 @@ public class Engine {
 
         while (isOn) {
 
-            input = getCommand();
-            isOn = checkInputForExitCommand(isOn, input); 
+            if (input.isEmpty() || input.isBlank()) {
 
-            if (!checkInputForNonCommand(input) && isOn) {
+                input = getCommand().strip();
+            }
+
+            System.out.println("command in run " + input);
+            isOn = checkInputForExitCommand(input); 
+
+            if (isOn) {
+                System.out.println("command leading to next action " + input);
                 routeNextAction(input);
-                isOn = false;
+                input = "";
             } 
         }
         scanner.close();
@@ -359,11 +365,22 @@ public class Engine {
      */
     private String getCommand() {
 
-        printer.printMsg("\n" + this.CHOICES_MSG
-        + "\n");
-        printer.printMsg("What do you want to do?");
-        String input = this.scanner.nextLine();
-        
+        String input = "";
+
+        while (input.isEmpty()) {
+
+            printer.printMsg("\n" + this.CHOICES_MSG
+            + "\n");
+            printer.printMsg("What do you want to do?");
+
+            input = this.scanner.nextLine();
+            System.out.println("here is input before check " + input);
+
+            if (checkInputForNonCommand(input)) {
+                input = "";
+            }
+        }
+        System.out.println("here before returning command: " + input);
         return input;
     }
 
@@ -376,9 +393,7 @@ public class Engine {
      */
     private boolean checkInputForNonCommand(String input) {
 
-        if (!this.options.contains(input) 
-            && !input.equals(this.options.get(0).toUpperCase())) {
-
+        if (!this.options.contains(input)) {
             printer.printMsg("Invalid command, " + input + " cannot compute.");
             return true;
         }
@@ -388,17 +403,16 @@ public class Engine {
 
     /**
      * checks whether the user wants to close the program.
-     * @param isOn      boolean     Changes according to user input. State of
-     *                              isOn is the value to be returned. 
      * @param input     String      User input.
      * @return          boolean     State of isOn after input valuation.
      */
-    private boolean checkInputForExitCommand(boolean isOn, String input) {
+    private boolean checkInputForExitCommand(String input) {
+
         if ( input.equalsIgnoreCase(this.options.get(0)) ) {
             printer.printMsg("closing with command...");
-            isOn = false;
+            return false;
         }
-        return isOn;
+        return true;
     }
 }
 
